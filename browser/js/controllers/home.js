@@ -20,7 +20,7 @@ app.controller('homeCtrl', function ($scope) {
 
 	Puzzle.prototype.generatePuzzle = function(){
 		var val = "";
-		var possible = "abcdefghijklmnopqrstuvwxyz";
+		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 		for(var stateName in this.states){
 			var state = this.states[stateName];

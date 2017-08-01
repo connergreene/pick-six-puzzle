@@ -33,5 +33,11 @@ app.controller('homeCtrl', function ($scope) {
 	myPuzz.generatePuzzle();
 
 	$scope.states = myPuzz.states;
+
+	$scope.nextStates = function(curr){
+		for(var i = 0; i < curr.transitions.length; i++){
+			
+		}
+	}
 	
 });

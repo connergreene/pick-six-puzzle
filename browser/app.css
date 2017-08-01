@@ -20,77 +20,77 @@
     top: 35px;
 }
 
-.state-0 {
+.state-q0 {
 	position: fixed;
 	margin-top: 20%;
 	left: 50%;
 }
 
-.state-1 {
+.state-q1 {
 	position: fixed;
 	margin-top: 20%;
 	left: 20%;
 }
 
-.state-2 {
+.state-q2 {
 	position: fixed;
 	left: 35%;
 }
 
-.state-3 {
+.state-q3 {
 	position: fixed;
 	margin-top: 13%;
 	left: 35%;
 }
 
-.state-4 {
+.state-q4 {
 	position: fixed;
 	margin-top: 27%;
 	left: 35%;
 }
 
-.state-5 {
+.state-q5 {
 	position: fixed;
 	margin-top: 40%;
 	left: 35%;
 }
 
-.state-6 {
+.state-q6 {
 	position: fixed;
 	margin-top: 7.5%;
 	left: 50%;
 }
 
-.state-7 {
+.state-q7 {
 	position: fixed;
 	margin-top: 32.5%;
 	left: 50%;
 }
 
-.state-8 {
+.state-q8 {
 	position: fixed;
 	left: 65%;
 }
 
-.state-9 {
+.state-q9 {
 	position: fixed;
 	margin-top: 13%;
 	left: 65%;
 }
 
-.state-10 {
+.state-q10 {
 	position: fixed;
 	margin-top: 27%;
 	left: 65%;
 }
 
-.state-11 {
+.state-q11 {
 	position: fixed;
 	margin-top: 40%;
 	left: 65%;
 }
 
-.state-12 {
+.state-q12 {
 	position: fixed;
 	margin-top: 20%;
 	left: 80%;

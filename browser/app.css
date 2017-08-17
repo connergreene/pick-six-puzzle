@@ -27,3 +27,7 @@ svg g text {
 	dominant-baseline: central;
 	font-size: 40px;
 }
+
+.control-panel {
+	float: left;
+}

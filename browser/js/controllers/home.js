@@ -43,8 +43,6 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 		}
 
 		this.answerKey = this.getAnswerKey();
-		console.log(this.answerKey)
-
 		return this;
 	}
 
@@ -85,17 +83,13 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 
 	Puzzle.prototype.getAnswerKey = function(){
 		var letters = '';
-		var anagrams;
 		var answers = [];
 		var puzz = this;
 		for(var stateName in this.states){
 			letters+=this.states[stateName].value
 		}
 		HomeFactory.getPossibleAnswers(letters)
-		.then(function(ans){
-			anagrams = ans;
-		})
-		.then(function(){
+		.then(function(anagrams){
 			for(var i = 0; i < anagrams.length; i++){
 				if(puzz.checkWord(anagrams[i])){
 					answers.push(anagrams[i]);
@@ -105,7 +99,6 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 			if(answers.length < 20){
 				puzz.generatePuzzle();
 			}
-			console.log(answers)
 			return answers;
 		});
 
@@ -116,9 +109,9 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 
 	var myPuzz = new Puzzle;
 	myPuzz.generatePuzzle();
-	
 	$scope.states = myPuzz.states;
 	$scope.correctAnswers = [];
+	$scope.showAnswers = false;
 
 	var clearStateColor = function(){
 		for(var state in $scope.states){
@@ -131,6 +124,13 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 		for(var state in $scope.states){
 			$scope.states[state].clickable = true;
 		}
+	}
+
+	var makeAllUnclickable = function(){
+		for(var state in $scope.states){
+			$scope.states[state].clickable = false;
+		}
+		clearStateColor();
 	}
 
 	var makeOthersUnclickable = function(curr){
@@ -175,6 +175,8 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 		myPuzz = new Puzzle;
 		myPuzz.generatePuzzle();
 		$scope.states = myPuzz.states;
+		$scope.answers = myPuzz.answerKey;
+		$scope.showAnswers = false;
 	}
 
 	
@@ -193,4 +195,11 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 		}
 		
 	}
+
+	$scope.giveUp = function(){
+		$scope.answers = myPuzz.answerKey;
+		$scope.showAnswers = true;
+		makeAllUnclickable();
+	}
+
 });

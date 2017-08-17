@@ -1,5 +1,5 @@
 'use strict'
-app.controller('homeCtrl', function ($scope) {
+app.controller('homeCtrl', function ($scope, HomeFactory) {
 	function Puzzle(){
 		this.states = { 
 			"q0": {value : "", clickable : true, transitions : ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12"]},
@@ -16,22 +16,107 @@ app.controller('homeCtrl', function ($scope) {
 			"q11": {value : "", clickable : true, transitions : ["q0", "q5", "q7", "q10", "q12"]},
 			"q12": {value : "", clickable : true, transitions : ["q0", "q8", "q9", "q10", "q11"]}
 	 	};
+
+	 	this.answerKey = [];
 	}
 
 	Puzzle.prototype.generatePuzzle = function(){
-		var val = "";
-		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		var letters = "BCDFGHJKLMNPQRSTVWXYZ";
+		var vowels = "AEIOU";
+		var results = [];
+
+		//between 8 and 4 vowels
+		for(var i = 0; i <= Math.random() * (8 - 4)+ 4; i++){
+			results.push(vowels.charAt(Math.floor(Math.random() * vowels.length)));
+		}
+
+		//other letters
+		var len = results.length;
+		for (var i = 0; i < 13 - len; i++){
+			results.push(letters.charAt(Math.floor(Math.random() * letters.length)));
+		}
 
 		for(var stateName in this.states){
 			var state = this.states[stateName];
-			state.value = possible.charAt(Math.floor(Math.random() * possible.length));
+			var ind = Math.floor(Math.random() * results.length);
+			state.value = results.splice(ind, 1)[0];
 		}
+
+		this.answerKey = this.getAnswerKey();
+		console.log(this.answerKey)
+
 		return this;
 	}
 
+	Puzzle.prototype.getKeyByValue = function(value){
+		var states = this.states
+		return Object.keys(states).find(function(key){
+			if(states[key] === value){
+				return key;
+			}
+		});
+	}
+
+	Puzzle.prototype.getKeyByLetter = function(letter){
+		var states = this.states;
+		return Object.keys(states).find(function(key){
+			if(states[key].value === letter){
+				return key;
+			}
+		});
+	}
+
+	Puzzle.prototype.checkWord = function(word){
+		for(var i = 0; i < word.length; i++){
+			var currLetter = word[i];
+			if(!word[i+1]){
+				return true;
+			}
+			var nextLetter = word[i+1]
+			var currState = this.getKeyByLetter(currLetter);
+			var nextState = this.getKeyByLetter(nextLetter);
+			var transitions = this.states[currState].transitions;
+			if(!transitions.includes(nextState)){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	Puzzle.prototype.getAnswerKey = function(){
+		var letters = '';
+		var anagrams;
+		var answers = [];
+		var puzz = this;
+		for(var stateName in this.states){
+			letters+=this.states[stateName].value
+		}
+		HomeFactory.getPossibleAnswers(letters)
+		.then(function(ans){
+			anagrams = ans;
+		})
+		.then(function(){
+			for(var i = 0; i < anagrams.length; i++){
+				if(puzz.checkWord(anagrams[i])){
+					answers.push(anagrams[i]);
+				}
+			}
+			//check if enough answers
+			if(answers.length < 20){
+				puzz.generatePuzzle();
+			}
+			console.log(answers)
+			return answers;
+		});
+
+		return answers;
+	}
+
+
+
 	var myPuzz = new Puzzle;
 	myPuzz.generatePuzzle();
-
+	
 	$scope.states = myPuzz.states;
 
 	var clearStateColor = function(){
@@ -47,12 +132,14 @@ app.controller('homeCtrl', function ($scope) {
 		}
 	}
 
-	var makeUnclickable = function(nextTransitions){
+	var makeOthersUnclickable = function(curr){
+		var nextTransitions = curr.transitions;
 		for(var state in $scope.states){
 			if(nextTransitions.indexOf(state) < 0){
 				$scope.states[state].clickable = false;
 			}
 		}
+		curr.clickable = true;
 	}
 
 	$scope.guess = '';
@@ -63,12 +150,14 @@ app.controller('homeCtrl', function ($scope) {
 	$scope.select = function(curr){
 		if(curr.clickable){
 			clearStateColor();
-			makeUnclickable(curr.transitions);
+			makeOthersUnclickable(curr);
 			for(var i = 0; i < curr.transitions.length; i++){
 				var nextState = angular.element(document.querySelector('.state-'+ curr.transitions[i]));
 				nextState.css("background-color", "grey");
 				$scope.states[curr.transitions[i]].clickable = true;
 			}
+			var currState = angular.element(document.querySelector('.state-'+ myPuzz.getKeyByValue(curr)));
+			currState.css("background-color", "lightgreen");
 			addValue(curr.value);
 		}
 	}
@@ -81,5 +170,16 @@ app.controller('homeCtrl', function ($scope) {
 
 
 
-	
+	$scope.submit = function(){
+		if($scope.guess.length < 6){
+			alert("Word must be 6 letters or more!");
+		}
+		else if (myPuzz.answerKey.includes($scope.guess)){
+			alert("Hoooorayyyy");
+		}
+		else{
+			alert("BOOOO");
+		}
+		
+	}
 });

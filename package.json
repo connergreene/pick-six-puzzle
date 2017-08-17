@@ -5,13 +5,20 @@
   "main": "pick-six.js",
   "dependencies": {
     "@uirouter/angularjs": "^1.0.3",
+    "anagram": "^0.4.0",
+    "anagramica": "^1.0.3",
     "angular": "^1.6.4",
     "angular-ui-bootstrap": "^2.5.0",
     "angular-ui-router": "^1.0.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "morgan": "^1.8.2",
-    "path": "^0.12.7"
+    "oxford-dictionary": "^1.4.0",
+    "oxford-dictionary-api": "^1.0.1",
+    "path": "^0.12.7",
+    "pf-sowpods": "^1.1.1",
+    "request": "^2.81.0",
+    "scrabbler": "^1.1.3"
   },
   "devDependencies": {},
   "scripts": {

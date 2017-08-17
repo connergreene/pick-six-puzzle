@@ -79,12 +79,23 @@
 
 <body>
 	<svg>
-		<g ng-click="select(states['q0'])">
-			<line x1="25%" y1="50%" x2="50%" y2="50%"></line>
+		<g class="state-circle state-q0" ng-click="select(states['q0'])">
+			<line x1="50%" y1="50%" x2="25%" y2="50%"></line>
+			<line x1="50%" y1="50%" x2="37.5%" y2="10%"></line>
+			<line x1="50%" y1="50%" x2="37.5%" y2="35%"></line>
+			<line x1="50%" y1="50%" x2="37.5%" y2="65%"></line>
+			<line x1="50%" y1="50%" x2="37.5%" y2="90%"></line>
+			<line x1="50%" y1="50%" x2="50%" y2="22.5%"></line>
+			<line x1="50%" y1="50%" x2="50%" y2="77.5%"></line>
+			<line x1="50%" y1="50%" x2="62.5%" y2="10%"></line>
+			<line x1="50%" y1="50%" x2="62.5%" y2="35%"></line>
+			<line x1="50%" y1="50%" x2="62.5%" y2="65%"></line>
+			<line x1="50%" y1="50%" x2="62.5%" y2="90%"></line>
+			<line x1="50%" y1="50%" x2="75%" y2="50%"></line>
 			<circle cx="50%" cy="50%" r="4.0em"></circle>
 			<text x="50%" y="50%">{{ states["q0"].value }}</text>
 		</g>
-		<g ng-click="select(states['q1'])">
+		<g class="state-circle state-q1" ng-click="select(states['q1'])">
 			<line x1="25%" y1="50%" x2="37.5%" y2="10%"></line>
 			<line x1="25%" y1="50%" x2="37.5%" y2="35%"></line>
 			<line x1="25%" y1="50%" x2="37.5%" y2="65%"></line>
@@ -92,29 +103,70 @@
 			<circle cx="25%" cy="50%" r="4.0em"></circle>
 			<text x="25%" y="50%">{{ states["q1"].value }}</text>
 		</g>
-		<g ng-click="select(states['q2'])">
+		<g class="state-circle state-q2" ng-click="select(states['q2'])">
 			<line x1="37.5%" y1="10%" x2="37.5%" y2="35%"></line>
+			<line x1="37.5%" y1="10%" x2="50%" y2="22.5%"></line>
+			<line x1="37.5%" y1="10%" x2="62.5%" y2="10%"></line>
 			<circle cx="37.5%" cy="10%" r="4.0em" ></circle>
 			<text x="37.5%" y="10%">{{ states["q2"].value }}</text>
 		</g>
-		<g ng-click="select(states['q3'])">
+		<g class="state-circle state-q3" ng-click="select(states['q3'])">
 			<line x1="37.5%" y1="35%" x2="37.5%" y2="65%"></line>
+			<line x1="37.5%" y1="35%" x2="50%" y2="22.5%"></line>
 			<circle cx="37.5%" cy="35%" r="4.0em" ></circle>
 			<text x="37.5%" y="35%">{{ states["q3"].value }}</text>
 		</g>
-		<g ng-click="select(states['q4'])"class="active">
+		<g class="state-circle state-q4" ng-click="select(states['q4'])">
 			<line x1="37.5%" y1="65%" x2="37.5%" y2="90%"></line>
+			<line x1="37.5%" y1="65%" x2="50%" y2="77.5%"></line>
 			<circle cx="37.5%" cy="65%" r="4.0em" ></circle>
 			<text x="37.5%" y="65%">{{ states["q4"].value }}</text>
 		</g>
-		<g ng-click="select(states['q5'])">
+		<g class="state-circle state-q5" ng-click="select(states['q5'])">
+			<line x1="37.5%" y1="90%" x2="50%" y2="77.5%"></line>
+			<line x1="37.5%" y1="90%" x2="62.5%" y2="90%"></line>
 			<circle cx="37.5%" cy="90%" r="4.0em" ></circle>
 			<text x="37.5%" y="90%">{{ states["q5"].value }}</text>
 		</g>
-						<!-- 
-		<g ng-click="select(states['q6'])">
-			<circle cx="5%" cy="50%" r="4.0em" ></circle>
-			<text x="5%" y="50%">{{ states["q6"].value }}</text>
-		</g> -->
+		<g class="state-circle state-q6" ng-click="select(states['q6'])">
+			<line x1="50%" y1="22.5%" x2="62.5%" y2="10%"></line>
+			<line x1="50%" y1="22.5%" x2="62.5%" y2="35%"></line>
+			<circle cx="50%" cy="22.5%" r="4.0em" ></circle>
+			<text x="50%" y="22.5%">{{ states["q6"].value }}</text>
+		</g>
+		<g class="state-circle state-q7" ng-click="select(states['q7'])">
+			<line x1="50%" y1="77.5%" x2="62.5%" y2="65%"></line>
+			<line x1="50%" y1="77.5%" x2="62.5%" y2="90%"></line>
+			<circle cx="50%" cy="77.5%" r="4.0em" ></circle>
+			<text x="50%" y="77.5%">{{ states["q7"].value }}</text>
+		</g>
+		<g class="state-circle state-q8" ng-click="select(states['q8'])">
+			<line x1="62.5%" y1="10%" x2="62.5%" y2="35%"></line>
+			<line x1="62.5%" y1="10%" x2="75%" y2="50%"></line>
+			<circle cx="62.5%" cy="10%" r="4.0em" ></circle>
+			<text x="62.5%" y="10%">{{ states["q8"].value }}</text>
+		</g>
+		<g class="state-circle state-q9" ng-click="select(states['q9'])">
+			<line x1="62.5%" y1="35%" x2="62.5%" y2="65%"></line>
+			<line x1="62.5%" y1="35%" x2="75%" y2="50%"></line>
+			<circle cx="62.5%" cy="35%" r="4.0em" ></circle>
+			<text x="62.5%" y="35%">{{ states["q9"].value }}</text>
+		</g>
+		<g class="state-circle state-q10" ng-click="select(states['q10'])">
+			<line x1="62.5%" y1="65%" x2="62.5%" y2="90%"></line>
+			<line x1="62.5%" y1="65%" x2="75%" y2="50%"></line>
+			<circle cx="62.5%" cy="65%" r="4.0em" ></circle>
+			<text x="62.5%" y="65%">{{ states["q10"].value }}</text>
+		</g>
+		<g class="state-circle state-q11" ng-click="select(states['q11'])">
+			<line x1="62.5%" y1="90%" x2="75%" y2="50%"></line>
+			<circle cx="62.5%" cy="90%" r="4.0em" ></circle>
+			<text x="62.5%" y="90%">{{ states["q11"].value }}</text>
+		</g>
+		<g class="state-circle state-q12" ng-click="select(states['q12'])">
+			<circle cx="75%" cy="50%" r="4.0em" ></circle>
+			<text x="75%" y="50%">{{ states["q12"].value }}</text>
+		</g>
+
 	</svg>
 </body>

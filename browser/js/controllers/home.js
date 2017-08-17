@@ -122,7 +122,7 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 	var clearStateColor = function(){
 		for(var state in $scope.states){
 			var currState = angular.element( document.querySelector('.state-'+ state));
-			currState.css("background-color", "white");
+			currState.css("fill", "black");
 		}
 	}
 
@@ -153,11 +153,11 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 			makeOthersUnclickable(curr);
 			for(var i = 0; i < curr.transitions.length; i++){
 				var nextState = angular.element(document.querySelector('.state-'+ curr.transitions[i]));
-				nextState.css("background-color", "grey");
+				nextState.css("fill", "grey");
 				$scope.states[curr.transitions[i]].clickable = true;
 			}
 			var currState = angular.element(document.querySelector('.state-'+ myPuzz.getKeyByValue(curr)));
-			currState.css("background-color", "lightgreen");
+			currState.css("fill", "lightgreen");
 			addValue(curr.value);
 		}
 	}

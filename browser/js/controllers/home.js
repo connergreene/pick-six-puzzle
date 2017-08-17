@@ -118,6 +118,7 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 	myPuzz.generatePuzzle();
 	
 	$scope.states = myPuzz.states;
+	$scope.correctAnswers = [];
 
 	var clearStateColor = function(){
 		for(var state in $scope.states){
@@ -168,7 +169,15 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 		clearStateColor();
 	}
 
+	$scope.newPuzzle = function(){
+		$scope.clear();
+		$scope.correctAnswers = [];
+		myPuzz = new Puzzle;
+		myPuzz.generatePuzzle();
+		$scope.states = myPuzz.states;
+	}
 
+	
 
 	$scope.submit = function(){
 		if($scope.guess.length < 6){
@@ -176,6 +185,8 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 		}
 		else if (myPuzz.answerKey.includes($scope.guess)){
 			alert("Hoooorayyyy");
+			$scope.correctAnswers.push($scope.guess);
+			$scope.guess = '';
 		}
 		else{
 			alert("BOOOO");

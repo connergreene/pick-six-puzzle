@@ -42,6 +42,18 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 			state.value = results.splice(ind, 1)[0];
 		}
 
+		//NEWSPAPER ORIGINAL PUZZLLLLLLEEEEEEEEE!!!!!!!!!!!!!!!
+		// var ind = 0;
+		// var results = ["D","I","C","A","N","T","E","O","O","R","E","P","L"];
+		// for(var stateName in this.states){
+		// 	var state = this.states[stateName];
+		// 	// var ind = Math.floor(Math.random() * results.length);
+		// 	state.value = results[ind];
+		// 	ind++
+		// }
+		//////////////////////////////////////////////////////
+
+
 		this.answerKey = this.getAnswerKey();
 		return this;
 	}
@@ -57,28 +69,46 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 
 	Puzzle.prototype.getKeyByLetter = function(letter){
 		var states = this.states;
-		return Object.keys(states).find(function(key){
+		var keys = [];
+
+		Object.keys(states).find(function(key){
 			if(states[key].value === letter){
-				return key;
+				keys.push(key);
 			}
 		});
+		return keys;
 	}
 
 	Puzzle.prototype.checkWord = function(word){
-		for(var i = 0; i < word.length; i++){
-			var currLetter = word[i];
-			if(!word[i+1]){
+		var puzz = this;
+		var possStartStates = this.getKeyByLetter(word[0]);  //array of states with letter
+		var pass = false;
+		var traverse = function(startState, nextIndex){
+			var transitions = puzz.states[startState].transitions;
+		
+			for(var x = 0; x < transitions.length; x++){
+				if(puzz.states[transitions[x]].value === word[nextIndex]){
+					nextIndex++;
+					if(!word[nextIndex]){
+						pass = true;
+						break;
+					}
+					traverse(transitions[x], nextIndex);
+					break;
+				}
+			}
+			return false;
+		}
+
+		for (var i = 0; i < possStartStates.length; i++){
+			var pass = false;
+			traverse(possStartStates[i], 1);
+			if(pass){
 				return true;
 			}
-			var nextLetter = word[i+1]
-			var currState = this.getKeyByLetter(currLetter);
-			var nextState = this.getKeyByLetter(nextLetter);
-			var transitions = this.states[currState].transitions;
-			if(!transitions.includes(nextState)){
-				return false;
-			}
+	
 		}
-		return true;
+		return false;
 	}
 
 	Puzzle.prototype.getAnswerKey = function(){
@@ -112,6 +142,7 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 	$scope.states = myPuzz.states;
 	$scope.correctAnswers = [];
 	$scope.showAnswers = false;
+
 
 	var clearStateColor = function(){
 		for(var state in $scope.states){
@@ -198,7 +229,9 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 
 	$scope.giveUp = function(){
 		$scope.answers = myPuzz.answerKey;
+		console.log($scope.answers.length)
 		$scope.showAnswers = true;
+		$scope.guess = '';
 		makeAllUnclickable();
 	}
 

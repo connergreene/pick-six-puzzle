@@ -44,6 +44,7 @@ app.get('/check/:letters', function(req, res, next){
       results.push(words[i]);
     }
   }
+  console.log("length", results.length)
   res.send(results);
 })
 

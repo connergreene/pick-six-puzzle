@@ -79,33 +79,37 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 
 	Puzzle.prototype.checkWord = function(word){
 		var puzz = this;
-		var possStartStates = this.getKeyByLetter(word[0]);
-		var traverse = function(startState, nextIndex){
-			var transitions = puzz.states[startState].transitions;
 		
-			for(var x = 0; x < transitions.length; x++){
-				if(puzz.states[transitions[x]].value === word[nextIndex]){
-					nextIndex++;
-					if(!word[nextIndex]){
-						pass = true;
-						break;
+		var traverse = function(possStartStates, nextIndex){
+			if(!word[nextIndex]){
+				return true;
+			}
+			for (var i = 0; i < possStartStates.length; i++){
+				var startState = possStartStates[i];
+				var transitions = puzz.states[startState].transitions;
+				var newStartStates = [];
+			
+				for(var x = 0; x < transitions.length; x++){
+					//console.log("letter of transition state", puzz.states[transitions[x]])
+					//console.log("next letter in word", word[nextIndex])
+					//console.log("transition letter", puzz.states[transitions[x]].value)
+					
+					//checking if next letter in word is in curr state transitions
+					if(puzz.states[transitions[x]].value === word[nextIndex]){
+						newStartStates.push(transitions[x]);
 					}
-					traverse(transitions[x], nextIndex);
-					break;
+				}
+				if(newStartStates.length > 0){
+					nextIndex++;
+					return traverse(newStartStates, nextIndex)
 				}
 			}
 			return false;
 		}
 
-		for (var i = 0; i < possStartStates.length; i++){
-			var pass = false;
-			traverse(possStartStates[i], 1);
-			if(pass){
-				return true;
-			}
-	
-		}
-		return false;
+		var possStartStates = this.getKeyByLetter(word[0]);
+			
+		return traverse(possStartStates, 1);
 	}
 
 	Puzzle.prototype.getAnswerKey = function(){
@@ -122,6 +126,8 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 					answers.push(anagrams[i]);
 				}
 			}
+			//var check = puzz.checkWord("ADENINE");
+			//console.log("check", check)
 			return answers;
 		});
 	}

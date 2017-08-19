@@ -109,7 +109,7 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 	}
 
 	Puzzle.prototype.getAnswerKey = function(){
-		var letters = '';
+		var letters = "";
 		var answers = [];
 		var puzz = this;
 		for(var stateName in this.states){
@@ -127,7 +127,8 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 	}
 
 	$scope.clear = function(){
-		$scope.guess = '';
+		$scope.guess = "";
+		$scope.message = "";
 		makeAllClickable();
 		clearStateColor();
 	};
@@ -163,13 +164,14 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 		//curr.clickable = true;
 	}
 
-	$scope.guess = '';
+	$scope.guess = "";
 	var addValue = function(val){
 		$scope.guess += val;
 	}
 
 	$scope.select = function(curr){
 		if(curr.clickable){
+			$scope.message = "";
 			clearStateColor();
 			makeOthersUnclickable(curr);
 			for(var i = 0; i < curr.transitions.length; i++){
@@ -186,10 +188,10 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 
 	$scope.submit = function(){
 		if($scope.guess.length < 6){
-			alert("Word must be 6 letters or more!");
+			$scope.message = "Word must be 6 letters or more!";
 		}
 		else if ($scope.correctAnswers.includes($scope.guess)){
-			alert("Already guessed this!");
+			$scope.message = "Already guessed this!";
 			$scope.clear();
 		}
 		else if ($scope.myPuzz.answerKey.includes($scope.guess)){
@@ -202,15 +204,16 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 			}
 		}
 		else{
-			alert("BOOOO");
+			$scope.message = "Not an answer!";
 		}
 		
 	}
 
 	$scope.endGame = function(){
+		$scope.message = "";
 		$scope.answers = $scope.myPuzz.answerKey;
 		$scope.showAnswers = true;
-		$scope.guess = '';
+		$scope.guess = "";
 		makeAllUnclickable();
 	}
 
@@ -221,6 +224,7 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 		$scope.states = $scope.myPuzz.states;
 		$scope.correctAnswers = [];
 		$scope.showAnswers = false;
+		$scope.message = "";
 		$scope.myPuzz.getAnswerKey().then(function(answers){
 			if(answers.length < 20){
 				$scope.makeFullPuzz();

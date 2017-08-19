@@ -29,7 +29,11 @@ validFrontendRoutes.forEach(function (stateRoute) {
   });
 });
 
-app.listen(8080);
+
+var port = 8080;
+var server = app.listen(process.env.PORT || port, function () {
+  console.log('HTTP server patiently listening on port', port);
+});
 
 app.get('/check/:letters', function(req, res, next){
   var letters = '';

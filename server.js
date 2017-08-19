@@ -23,7 +23,6 @@ app.use(express.static(__dirname + '/node_modules'));
 
 var validFrontendRoutes = ['/', '/check'];
 var indexPath = path.join(__dirname, 'browser', 'index.html');
-console.log(indexPath);
 validFrontendRoutes.forEach(function (stateRoute) {
   app.get(stateRoute, function (req, res) {
     res.sendFile(indexPath);
@@ -44,7 +43,6 @@ app.get('/check/:letters', function(req, res, next){
       results.push(words[i]);
     }
   }
-  console.log("length", results.length)
   res.send(results);
 })
 

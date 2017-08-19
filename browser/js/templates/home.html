@@ -1,12 +1,25 @@
 <div class="control-panel">
-	<h1> {{ guess }} </h1>
-	<button ng-click="clear()">clear</button>
-	<button ng-click="submit()">submit</button>
-	<button ng-click="newPuzzle()">New Puzzle</button>
-	<button ng-click="giveUp()">Give Up</button>
-	<div ng-repeat="correctAnswer in correctAnswers ">{{ correctAnswer }}</div>
-	<div class="answers">
-		<div ng-show="showAnswers" ng-repeat="answer in answers">{{ answer }}</div>
+	<div class="title-container">
+		<h1 class="title">SIX FOR A SPELL<h1>
+		<div class="subtitle">Based on game by Will Shortz of the New York Times</div>
+	</div>
+	<p>
+		How many common words of exactly 6 letters can you find? Words must be spelled sequentially by following the lines connecting circles.  You may use a letter once -- but not twice in a row.  Click on letter to select letter.  There are <strong> {{ answerAmount }} </strong> more answers left.
+	</p>
+	<div class="guess">
+		<h1> {{ guess }} </h1>
+	</div>
+	<div class="buttons">
+		<button ng-hide="showAnswers" ng-click="clear()">Clear</button>
+		<button ng-hide="showAnswers" ng-click="submit()">Submit</button>
+		<button ng-click="makeFullPuzz()">New Puzzle</button>
+		<button ng-hide="showAnswers" ng-click="endGame()">Give Up</button>
+	</div>
+	<div ng-hide="showAnswers" class="correct-guesses">
+		<div ng-repeat="correctAnswer in correctAnswers ">{{ correctAnswer }}</div>
+	</div>
+	<div ng-show="showAnswers" class="answers">
+		<div ng-class="{correct: correctAnswers.includes(answer), incorrect: !correctAnswers.includes(answer)}" ng-repeat="answer in answers">{{ answer }}</div>
 	</div>
 </div>
 <div class="puzzle">

@@ -1,5 +1,5 @@
 'use strict'
-app.controller('homeCtrl', function ($scope, HomeFactory) {
+app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 	function Puzzle(){
 		this.states = { 
 			"q0": {value : "", clickable : true, transitions : ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12"]},
@@ -53,8 +53,6 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 		// }
 		//////////////////////////////////////////////////////
 
-
-		this.answerKey = this.getAnswerKey();
 		return this;
 	}
 
@@ -81,8 +79,7 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 
 	Puzzle.prototype.checkWord = function(word){
 		var puzz = this;
-		var possStartStates = this.getKeyByLetter(word[0]);  //array of states with letter
-		var pass = false;
+		var possStartStates = this.getKeyByLetter(word[0]);
 		var traverse = function(startState, nextIndex){
 			var transitions = puzz.states[startState].transitions;
 		
@@ -118,30 +115,22 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 		for(var stateName in this.states){
 			letters+=this.states[stateName].value
 		}
-		HomeFactory.getPossibleAnswers(letters)
+		return HomeFactory.getPossibleAnswers(letters)
 		.then(function(anagrams){
 			for(var i = 0; i < anagrams.length; i++){
 				if(puzz.checkWord(anagrams[i])){
 					answers.push(anagrams[i]);
 				}
 			}
-			//check if enough answers
-			if(answers.length < 20){
-				puzz.generatePuzzle();
-			}
 			return answers;
 		});
-
-		return answers;
 	}
 
-
-
-	var myPuzz = new Puzzle;
-	myPuzz.generatePuzzle();
-	$scope.states = myPuzz.states;
-	$scope.correctAnswers = [];
-	$scope.showAnswers = false;
+	$scope.clear = function(){
+		$scope.guess = '';
+		makeAllClickable();
+		clearStateColor();
+	};
 
 
 	var clearStateColor = function(){
@@ -171,7 +160,7 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 				$scope.states[state].clickable = false;
 			}
 		}
-		curr.clickable = true;
+		//curr.clickable = true;
 	}
 
 	$scope.guess = '';
@@ -188,38 +177,29 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 				nextState.css("fill", "grey");
 				$scope.states[curr.transitions[i]].clickable = true;
 			}
-			var currState = angular.element(document.querySelector('.state-'+ myPuzz.getKeyByValue(curr)));
+			var currState = angular.element(document.querySelector('.state-'+ $scope.myPuzz.getKeyByValue(curr)));
 			currState.css("fill", "lightgreen");
 			addValue(curr.value);
 		}
 	}
-
-	$scope.clear = function(){
-		$scope.guess = '';
-		makeAllClickable();
-		clearStateColor();
-	}
-
-	$scope.newPuzzle = function(){
-		$scope.clear();
-		$scope.correctAnswers = [];
-		myPuzz = new Puzzle;
-		myPuzz.generatePuzzle();
-		$scope.states = myPuzz.states;
-		$scope.answers = myPuzz.answerKey;
-		$scope.showAnswers = false;
-	}
-
 	
 
 	$scope.submit = function(){
 		if($scope.guess.length < 6){
 			alert("Word must be 6 letters or more!");
 		}
-		else if (myPuzz.answerKey.includes($scope.guess)){
-			alert("Hoooorayyyy");
+		else if ($scope.correctAnswers.includes($scope.guess)){
+			alert("Already guessed this!");
+			$scope.clear();
+		}
+		else if ($scope.myPuzz.answerKey.includes($scope.guess)){
 			$scope.correctAnswers.push($scope.guess);
-			$scope.guess = '';
+			$scope.clear();
+			$scope.answerAmount--;
+			if($scope.answerAmount === 0){
+				$scope.endGame();
+				alert("YOU DID IT!!!!!!!!!!!!");
+			}
 		}
 		else{
 			alert("BOOOO");
@@ -227,12 +207,32 @@ app.controller('homeCtrl', function ($scope, HomeFactory) {
 		
 	}
 
-	$scope.giveUp = function(){
-		$scope.answers = myPuzz.answerKey;
-		console.log($scope.answers.length)
+	$scope.endGame = function(){
+		$scope.answers = $scope.myPuzz.answerKey;
 		$scope.showAnswers = true;
 		$scope.guess = '';
 		makeAllUnclickable();
 	}
 
+	$scope.makeFullPuzz = function(){
+		$scope.clear();
+		$scope.myPuzz = new Puzzle;
+		$scope.myPuzz.generatePuzzle();
+		$scope.states = $scope.myPuzz.states;
+		$scope.correctAnswers = [];
+		$scope.showAnswers = false;
+		$scope.myPuzz.getAnswerKey().then(function(answers){
+			if(answers.length < 20){
+				$scope.makeFullPuzz();
+			}
+			else{
+				$scope.myPuzz.answerKey = answers;
+				console.log(answers);
+				$scope.answerAmount = answers.length;
+			}
+		});
+		return;
+	}
+
+	$scope.makeFullPuzz();
 });

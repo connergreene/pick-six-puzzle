@@ -107,7 +107,8 @@ button {
     border-radius: 5px;
 }
 
-.message {
+#message {
+	position: relative;
 	bottom: 0px;
     top: 15px;
     text-align: center;

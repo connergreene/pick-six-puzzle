@@ -231,7 +231,6 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 			}
 			else{
 				$scope.myPuzz.answerKey = answers;
-				console.log(answers);
 				$scope.answerAmount = answers.length;
 			}
 		});

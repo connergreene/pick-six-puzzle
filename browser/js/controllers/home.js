@@ -82,12 +82,15 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 		
 		var traverse = function(possStartStates, nextIndex){
 			if(!word[nextIndex]){
+				//console.log("gotttt it!!!!!!!!!!!!!!")
 				return true;
 			}
+			//console.log("possStartStates", possStartStates)
 			for (var i = 0; i < possStartStates.length; i++){
 				var startState = possStartStates[i];
 				var transitions = puzz.states[startState].transitions;
 				var newStartStates = [];
+				//console.log("current start state:", startState, ":", puzz.states[startState])
 			
 				for(var x = 0; x < transitions.length; x++){
 					//console.log("letter of transition state", puzz.states[transitions[x]])
@@ -100,8 +103,17 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 					}
 				}
 				if(newStartStates.length > 0){
+					//console.log("onto next state")
 					nextIndex++;
-					return traverse(newStartStates, nextIndex)
+					
+					//checkin traverse(newStartStates, nextIndex);
+					if(!traverse(newStartStates, nextIndex) && possStartStates.length > 1){
+						newStartStates.reverse();
+						traverse(newStartStates, nextIndex--)
+					}
+					else{
+						return traverse(newStartStates, nextIndex);
+					}
 				}
 			}
 			return false;
@@ -126,8 +138,8 @@ app.controller('homeCtrl', function ($scope, HomeFactory, $q) {
 					answers.push(anagrams[i]);
 				}
 			}
-			//var check = puzz.checkWord("ADENINE");
-			//console.log("check", check)
+			// var check = puzz.checkWord("DOTTED");
+			// console.log("check", check)
 			return answers;
 		});
 	}

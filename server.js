@@ -44,7 +44,10 @@ app.get('/check/:letters', function(req, res, next){
   var results = [];
   for (var i = 0; i < words.length; i++){
     if(words[i].length>=6){
-      results.push(words[i]);
+      results.push(words[i])
+      // if(words[i][0] === "D" && words[i][1] === "O"){
+      //   console.log(words[i])
+      // }
     }
   }
   res.send(results);

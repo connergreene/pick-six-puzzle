@@ -25,8 +25,8 @@ app.controller('pickSixCtrl', function ($scope, checkFactory, $q) {
 		var vowels = "AEIOU";
 		var results = [];
 
-		//between 8 and 4 vowels
-		for(var i = 0; i <= Math.random() * (8 - 4)+ 4; i++){
+		//4 to 9 vowels
+		for(var i = 0; i <= Math.random() * (9 - 4)+ 4; i++){
 			results.push(vowels.charAt(Math.floor(Math.random() * vowels.length)));
 		}
 

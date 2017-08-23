@@ -6,20 +6,35 @@ app.controller('spellingBeeCtrl', function ($scope, checkFactory) {
 	}
 
 	Puzzle.prototype.generatePuzzle = function(){
-		var alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		var results = [];
+		var consonants = "BCDFGHJKLMNPQRSTVWXYZ";
+		var vowels = "AEIOU";
 
-		for(var i = 0; i <= 6; i++){
-			this.letters += alph.charAt(Math.floor(Math.random() * alph.length));
+		//2 to 5 vowels
+		for(var i = 0; i <= Math.random() * (6 - 2)+ 2; i++){
+			var vowel = vowels.charAt(Math.floor(Math.random() * vowels.length));
+			if(!this.letters.includes(vowel)){
+				this.letters += vowel;
+			}
 		}
+
+		//other letters
+		var len = this.letters.length;
+		for (var i = 0; i < 7 - len; i++){
+			var consonant = consonants.charAt(Math.floor(Math.random() * consonants.length));
+			if(!this.letters.includes(consonant)){
+				this.letters += consonant;
+			}
+			else{
+				i--;
+			}
+		}
+
 		return this;
 	}
 
 	Puzzle.prototype.getAnswerKey = function(){
-		console.log(this.letters)
 		return checkFactory.checkSpellingBee(this.letters)
 		.then(function(answers){
-			console.log(answers)
 			return answers;
 		});
 	}
@@ -76,7 +91,26 @@ app.controller('spellingBeeCtrl', function ($scope, checkFactory) {
 		$scope.myPuzz.getAnswerKey()
 		.then(function(answers){
 			$scope.myPuzz.answerKey = answers;
-			$scope.answerAmount = answers.length;
+			if(answers.length >= 10){
+				var i = 0;
+				$scope.allLetterWords = [];
+				for(var i = 0; i < answers.length; i++){
+					var answer = answers[i];
+					if (answer.includes($scope.myPuzz.letters[1]) && answer.includes($scope.myPuzz.letters[2]) && answer.includes($scope.myPuzz.letters[3]) && answer.includes($scope.myPuzz.letters[4]) && answer.includes($scope.myPuzz.letters[5]) && answer.includes($scope.myPuzz.letters[6])){
+						$scope.allLetterWords.push(answer);
+					}
+				};
+				if ($scope.allLetterWords.length < 1){
+					$scope.makeFullPuzz();
+				}
+				else{
+					$scope.answerAmount = answers.length;
+					console.log("all letter words:", $scope.allLetterWords)
+				}
+			}
+			else{
+				$scope.makeFullPuzz();
+			}
 		});
 		return;
 	}

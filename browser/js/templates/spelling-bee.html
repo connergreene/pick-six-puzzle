@@ -25,7 +25,7 @@
 		<div ng-repeat="correctAnswer in correctAnswers ">{{ correctAnswer }}</div>
 	</div>
 	<div ng-show="showAnswers" class="answers">
-		<div ng-class="{correct: correctAnswers.includes(answer), incorrect: !correctAnswers.includes(answer)}" ng-repeat="answer in answers">{{ answer }}</div>
+		<div ng-class="{correct: correctAnswers.includes(answer), incorrect: !correctAnswers.includes(answer), all: allLetterWords.includes(answer)}" ng-repeat="answer in answers">{{ answer }}</div>
 	</div>
 </div>
 <div class="bee-puzzle">

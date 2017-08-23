@@ -19,7 +19,7 @@
     height: 600px;
     width: 1200px;
     margin-left: 425px;
-    top: 40px;
+    top: 80px;
 }
 
 svg {
@@ -150,6 +150,10 @@ button {
 	color: lightgreen;
 }
 
+.all {
+	font-weight: bold;
+}
+
 .incorrect {
 	color: red;
 }
@@ -163,8 +167,8 @@ button {
     position: fixed;
     height: 600px;
     width: 1200px;
-    margin-left: 425px;
-    top: 40px;
+    margin-left: 625px;
+    top: 25%;
 }
 
 

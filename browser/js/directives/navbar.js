@@ -12,6 +12,15 @@ app.directive('navbar', function ($state, $location) {
 			};
 
 			scope.isPickSix = function(){
+				if ($location.path() === '/pick-six'){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+
+			scope.isHome = function(){
 				if ($location.path() === '/'){
 					return true;
 				}

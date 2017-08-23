@@ -18,11 +18,12 @@ app.use(function(req, res, next) {
 
 app.use(morgan('dev'));
 
+app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/browser'));
 app.use(express.static(__dirname + '/node_modules'));
 
 var validFrontendRoutes = ['/', '/pick-six', '/spelling-bee'];
-var indexPath = path.join(__dirname, 'browser', 'index.html');
+var indexPath = path.join(__dirname, 'public', 'index.html');
 validFrontendRoutes.forEach(function (stateRoute) {
   app.get(stateRoute, function (req, res) {
     res.sendFile(indexPath);

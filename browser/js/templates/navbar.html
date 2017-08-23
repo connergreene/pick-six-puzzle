@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav ng-if="!isHome()" class="navbar navbar-default">
 	<div class="container">
 		<div class="navbar-header">
 			<button ng-if="!isPickSix()" class="nav-btn btn-default" ui-sref="pick-six">Six For A Spell</button>

@@ -1,3 +1,35 @@
+body {
+	background-color: #ffffff;
+	background-image: url("/images/clean-gray-paper.png");
+}
+
+.main-title {
+	text-align: center;
+	font-size: 50px;
+	margin-bottom: 50px;
+}
+
+.home-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.icon {
+	text-align: center;
+}
+
+.icon img {
+	width: 400px;
+	height: 350px;
+	border-radius: 5px;
+	box-shadow: 0 0 30px #ccc;
+}
+
+.icon img:hover {
+	box-shadow: 0px 0px 30px black;
+}
+
 .navbar-header {
 	float: right;
 	position: relative;
@@ -48,6 +80,10 @@ svg g line {
 
 .state-circle svg g circle {
 	fill: black;
+}
+
+.state-circle circle:hover { 
+    fill: rgb(102, 153, 255);
 }
 
 svg g text {

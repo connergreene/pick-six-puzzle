@@ -11,7 +11,7 @@ app.directive('navbar', function ($state, $location) {
 				return path.startsWith(partial);
 			};
 
-			scope.isHome = function(){
+			scope.isPickSix = function(){
 				if ($location.path() === '/'){
 					return true;
 				}

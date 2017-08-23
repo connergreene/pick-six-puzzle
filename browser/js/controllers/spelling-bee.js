@@ -105,7 +105,6 @@ app.controller('spellingBeeCtrl', function ($scope, checkFactory) {
 				}
 				else{
 					$scope.answerAmount = answers.length;
-					console.log("all letter words:", $scope.allLetterWords)
 				}
 			}
 			else{

@@ -1,3 +1,15 @@
+.navbar-header {
+	float: right;
+	position: relative;
+    top: 7px;
+}
+
+.navbar-header button {
+	background-color: blue;
+    color: white;
+}
+
+
 .title-container {
 	margin-bottom: 30px;
 	text-align: center;

@@ -30,9 +30,6 @@
 </div>
 <div class="bee-puzzle">
 	<svg class="spelling-bee" height="500" width="500">
-	    <polygon fill="white" stroke="black" stroke-width="2" 
-	            points="100,175  137.5,240  212.5,240  250,175 212.5,110 137.5,110">
-	    </polygon>
 	    <circle fill="rgba(255,255,255,0.0)" stroke="black" stroke-width="5" cx="175" cy="175" r="150"></circle>
 	    <line stroke="black" stroke-width="2" x1="137.5" y1="110" x2="100" y2="42"></line>
 	    <line stroke="black" stroke-width="2" x1="212.5" y1="110" x2="250" y2="42"></line>
@@ -40,12 +37,33 @@
 	    <line stroke="black" stroke-width="2" x1="137.5" y1="240" x2="100" y2="308"></line>
 	    <line stroke="black" stroke-width="2" x1="250" y1="175" x2="325" y2="175"></line>
 	    <line stroke="black" stroke-width="2" x1="212.5" y1="240" x2="250" y2="308"></line>
-	    <text x="172.5" y="192" ng-click="addValue(myPuzz.letters[0])">{{ myPuzz.letters[0] }}</text>
-		<text x="75" y="135" ng-click="addValue(myPuzz.letters[1])">{{ myPuzz.letters[1] }}</text>
-		<text x="75" y="245" ng-click="addValue(myPuzz.letters[2])">{{ myPuzz.letters[2] }}</text>
-		<text x="172.5" y="85" ng-click="addValue(myPuzz.letters[3])">{{ myPuzz.letters[3] }}</text>
-		<text x="270" y="135" ng-click="addValue(myPuzz.letters[4])">{{ myPuzz.letters[4] }}</text>
-		<text x="270" y="245" ng-click="addValue(myPuzz.letters[5])">{{ myPuzz.letters[5] }}</text>
-		<text x="172.5" y="295" ng-click="addValue(myPuzz.letters[6])">{{ myPuzz.letters[6] }}</text>
+
+		<text x="172.5" y="192">{{ myPuzz.letters[0] }}</text>
+		<polygon class="letter-click" ng-click="addValue(myPuzz.letters[0])" fill="rgba(255,255,255,0.0)" stroke="black" stroke-width="2" points="100,175  137.5,240  212.5,240  250,175 212.5,110 137.5,110">
+		</polygon>
+
+		<text x="75" y="135">{{ myPuzz.letters[1] }}</text>
+		<polygon class="letter-click" ng-click="addValue(myPuzz.letters[1])" fill="rgba(255,255,255,0.0)" points="104 44,88 54,69 70,55 84,39 109,31 132,26 149,25 161,27 177,99 175,138 113">
+		</polygon>
+
+		<text x="75" y="245">{{ myPuzz.letters[2] }}</text>
+		<polygon class="letter-click" ng-click="addValue(myPuzz.letters[2])" fill="rgba(255,255,255,0.0)" fill="black" points="28 199,30 225,43 246,56 268,71 286,88 301,100 307,138 239,100 174,25 174">
+		</polygon>
+
+		<text x="172.5" y="85">{{ myPuzz.letters[3] }}</text>
+		<polygon class="letter-click" ng-click="addValue(myPuzz.letters[3])" fill="rgba(255,255,255,0.0)" points="123 36,146 29,177 26,201 27,225 34,250 45,211 110,139 110,102 43">
+		</polygon>
+
+		<text x="270" y="135">{{ myPuzz.letters[4] }}</text>
+		<polygon class="letter-click" ng-click="addValue(myPuzz.letters[4])" fill="rgba(255,255,255,0.0)" fill="black" points="248 47,264 55,280 68,293 83,309 105,317 126,326 153,327 176,250 177,212 111">
+		</polygon>
+
+		<text x="270" y="245">{{ myPuzz.letters[5] }}</text>
+		<polygon  class="letter-click" ng-click="addValue(myPuzz.letters[5])" fill="rgba(255,255,255,0.0)" points="249 305,271 292,285 279,301 260,311 241,321 219,326 196,326 176,250 173,212 237">
+		</polygon>
+
+		<text x="172.5" y="295">{{ myPuzz.letters[6] }}</text>
+		<polygon class="letter-click" ng-click="addValue(myPuzz.letters[6])" fill="rgba(255,255,255,0.0)" points="100 303,114 313,139 320,167 325,196 324,223 319,249 308,214 240,137 240">
+		</polygon>
 	</svg>
 </div>

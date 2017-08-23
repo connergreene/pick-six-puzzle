@@ -84,7 +84,6 @@ app.controller('spellingBeeCtrl', function ($scope, checkFactory) {
 		$scope.clear();
 		$scope.myPuzz = new Puzzle;
 		$scope.myPuzz.generatePuzzle();
-		$scope.states = $scope.myPuzz.states;
 		$scope.correctAnswers = [];
 		$scope.showAnswers = false;
 		$scope.message = "";

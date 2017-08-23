@@ -183,6 +183,10 @@ button {
     top: 25%;
 }
 
+.letter-click:hover { 
+    fill: rgba(128,128,128,0.3);
+}
+
 
 @media screen and (max-width : 830px), screen and (max-device-width : 1000px) {
 

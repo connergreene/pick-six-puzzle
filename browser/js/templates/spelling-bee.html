@@ -1,0 +1,51 @@
+<div class="control-panel">
+	<div class="title-container">
+		<h1 class="title">SPELLING BEE<h1>
+		<div class="subtitle">Based on game by Frank Longo of the New York Times</div>
+	</div>
+	<p>
+		How many common words of 5 or more letters can spell using the letters in the hive? Every answer must use the center letter at least once.  Letters may be reused in a word.  At least one word will use all 7 letters.  Proper names and hypenated words are not allowed.  Click on letter to select letter.  There are <strong> {{ answerAmount }} </strong> more answers left.
+	</p>
+
+	<div class="buttons-top">
+		<button id="new-btn" ng-click="makeFullPuzz()">New Puzzle</button>
+		<button id="end-btn" ng-hide="showAnswers" ng-click="endGame()">Give Up</button>
+	</div>
+	<div class="guess">
+		<h1> {{ guess }} </h1>
+	</div>
+	<div class="buttons-bottom">
+		<button id="clear-btn" ng-hide="showAnswers" ng-click="clear()">Clear</button>
+		<button id="submit-btn" ng-hide="showAnswers" ng-click="submit()">Submit</button>
+	</div>
+	<p id="message"> 
+		{{ message }} 
+	</p>
+	<div ng-hide="showAnswers" class="correct-guesses">
+		<div ng-repeat="correctAnswer in correctAnswers ">{{ correctAnswer }}</div>
+	</div>
+	<div ng-show="showAnswers" class="answers">
+		<div ng-class="{correct: correctAnswers.includes(answer), incorrect: !correctAnswers.includes(answer)}" ng-repeat="answer in answers">{{ answer }}</div>
+	</div>
+</div>
+<div class="bee-puzzle">
+	<svg class="spelling-bee" height="500" width="500">
+	    <polygon fill="white" stroke="black" stroke-width="2" 
+	            points="100,175  137.5,240  212.5,240  250,175 212.5,110 137.5,110">
+	    </polygon>
+	    <circle fill="rgba(255,255,255,0.0)" stroke="black" stroke-width="5" cx="175" cy="175" r="150"></circle>
+	    <line stroke="black" stroke-width="2" x1="137.5" y1="110" x2="100" y2="42"></line>
+	    <line stroke="black" stroke-width="2" x1="212.5" y1="110" x2="250" y2="42"></line>
+	    <line stroke="black" stroke-width="2" x1="100" y1="175" x2="25" y2="175"></line>
+	    <line stroke="black" stroke-width="2" x1="137.5" y1="240" x2="100" y2="308"></line>
+	    <line stroke="black" stroke-width="2" x1="250" y1="175" x2="325" y2="175"></line>
+	    <line stroke="black" stroke-width="2" x1="212.5" y1="240" x2="250" y2="308"></line>
+	    <text x="172.5" y="192" ng-click="addValue(myPuzz.letters[0])">{{ myPuzz.letters[0] }}</text>
+		<text x="75" y="135" ng-click="addValue(myPuzz.letters[1])">{{ myPuzz.letters[1] }}</text>
+		<text x="75" y="245" ng-click="addValue(myPuzz.letters[2])">{{ myPuzz.letters[2] }}</text>
+		<text x="172.5" y="85" ng-click="addValue(myPuzz.letters[3])">{{ myPuzz.letters[3] }}</text>
+		<text x="270" y="135" ng-click="addValue(myPuzz.letters[4])">{{ myPuzz.letters[4] }}</text>
+		<text x="270" y="245" ng-click="addValue(myPuzz.letters[5])">{{ myPuzz.letters[5] }}</text>
+		<text x="172.5" y="295" ng-click="addValue(myPuzz.letters[6])">{{ myPuzz.letters[6] }}</text>
+	</svg>
+</div>

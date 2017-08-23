@@ -20,14 +20,18 @@
   <script src="/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
 
   <script src="app.js"></script>
-  <script src="/js/controllers/home.js"></script>
-  <script src="/js/states/home.js"></script>
-  <script src="/js/factories/home.js"></script>
+  <script src="/js/controllers/pick-six.js"></script>
+  <script src="/js/controllers/spelling-bee.js"></script>
+  <script src="/js/states/pick-six.js"></script>
+  <script src="/js/states/spelling-bee.js"></script>
+  <script src="/js/factories/checker.js"></script>
+  <script src="/js/directives/navbar.js"></script>
 
 </head>
 
 <body ng-app="pick-six">
   <div id="main" class="container-fluid">
+    <navbar></navbar>
     <ui-view></ui-view>
   </div>
 </body>

@@ -21,7 +21,7 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + '/browser'));
 app.use(express.static(__dirname + '/node_modules'));
 
-var validFrontendRoutes = ['/', '/check'];
+var validFrontendRoutes = ['/', '/pick-six', '/spelling-bee'];
 var indexPath = path.join(__dirname, 'browser', 'index.html');
 validFrontendRoutes.forEach(function (stateRoute) {
   app.get(stateRoute, function (req, res) {
@@ -35,7 +35,7 @@ var server = app.listen(process.env.PORT || port, function () {
   console.log('HTTP server patiently listening on port', port);
 });
 
-app.get('/check/:letters', function(req, res, next){
+app.get('/pick-six/:letters', function(req, res, next){
   var letters = '';
   for(var i = 0; i < 6; i++){
     letters+=req.params.letters;
@@ -48,6 +48,21 @@ app.get('/check/:letters', function(req, res, next){
       // if(words[i][0] === "D" && words[i][1] === "O"){
       //   console.log(words[i])
       // }
+    }
+  }
+  res.send(results);
+})
+
+app.get('/spelling-bee/:letters', function(req, res, next){
+  var letters = '';
+  for(var i = 0; i < 10; i++){
+    letters+=req.params.letters;
+  }
+  var words = sowpods.anagram(letters);
+  var results = [];
+  for (var i = 0; i < words.length; i++){
+    if(words[i].length >= 5 && words[i].includes(letters[0])){
+      results.push(words[i])
     }
   }
   res.send(results);

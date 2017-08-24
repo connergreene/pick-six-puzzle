@@ -303,6 +303,7 @@ button {
 	.icon img {
 		width: 200px;
     	height: 180px;
+    	cursor: pointer;
 	}
 
 	.icon h1 {

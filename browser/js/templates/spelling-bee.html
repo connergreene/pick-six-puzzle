@@ -18,7 +18,7 @@
 		<button id="clear-btn" ng-hide="showAnswers" ng-click="clear()">Clear</button>
 		<button id="submit-btn" ng-hide="showAnswers" ng-click="submit()">Submit</button>
 	</div>
-	<div class="words-left">
+	<div ng-hide="showAnswers" class="words-left">
 	 There are <strong> {{ answerAmount }} </strong> more answers left.
 	</div>
 	<p id="message"> 

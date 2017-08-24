@@ -104,8 +104,8 @@ svg g line {
 	fill: black;
 }
 
-.state-circle circle:hover { 
-    fill: rgb(102, 153, 255);
+.state-circle:hover { 
+    cursor: pointer;
 }
 
 svg g text {
@@ -243,6 +243,10 @@ button {
     width: 1200px;
     margin-left: 625px;
     top: 25%;
+}
+
+.letter-click { 
+    cursor: pointer;
 }
 
 .letter-click:hover { 

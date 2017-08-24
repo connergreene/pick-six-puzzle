@@ -151,6 +151,10 @@ svg g text {
     color: white;
 }
 
+.words-left {
+	display: none;
+}
+
 .buttons-bottom {
 	text-align: center;
     position: relative;
@@ -375,6 +379,14 @@ button {
 
 	.guess h1 {
 		margin-top: 2px;
+	}
+
+	.words-left {
+		display: block;
+    	text-align: center;
+    	font-size: 15px;
+    	position: relative;
+    	top: 265px;
 	}
 
 	.buttons-bottom {

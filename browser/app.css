@@ -39,7 +39,6 @@ body {
 }
 
 .navbar-header {
-	float: left;
 	position: relative;
     top: 7px;
 }
@@ -49,6 +48,21 @@ body {
     color: white;
 }
 
+.container {
+	height: 50px;
+}
+
+.title-wrap {
+	display: none;
+}
+
+.back-btn {
+	float: left
+}
+
+.rules-btn {
+	display: none;
+}
 
 .title-container {
 	margin-bottom: 30px;
@@ -233,6 +247,41 @@ button {
 
 
 @media screen and (max-width : 830px), screen and (max-device-width : 1000px) {
+
+	.rules-btn {
+		display: inline-block;
+		float: right;
+	}
+
+	.navbar-header {
+		text-align: center;
+	}
+
+	.title-wrap {
+		display: inline-block;
+		position: relative;
+    	bottom: 15px;
+	}
+
+	.title-wrap .nav-title {
+		font-size: 28px;
+		position: relative;
+    	top: 5px;
+	}
+
+	.title-wrap .nav-subtitle {
+		font-size: 10px;
+		color: grey;
+	}
+
+	.modal-content {
+		position: relative;
+    	top: 175px;
+	}
+
+	.modal-header {
+		text-align: center;
+	}
 
 	.main-title {
 		margin-bottom: 15px;

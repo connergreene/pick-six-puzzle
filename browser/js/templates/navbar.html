@@ -1,26 +1,37 @@
 <nav ng-if="!isHome()" class="navbar navbar-default">
 	<div class="container">
 		<div class="navbar-header">
-			<!-- <button ng-if="!isPickSix()" class="nav-btn btn-default" ui-sref="pick-six">Six For A Spell</button>
-			<button ng-if="isPickSix()" class="nav-btn btn-default" ui-sref="spelling-bee">Spelling Bee</button> -->
-
-			<button class="nav-btn btn-default" ui-sref="home">Back</button>
-
-
-			<button class="add-btn" ng-click="toggleModal()">
-				<div>
-				Heelo
-				</div> 
-			<span class="glyphicon glyphicon-plus button-symbol"></span>
+			<button class="back-btn" ui-sref="home">
+				Back
 			</button>
-      
-
+			<div class="title-wrap">
+				<div class="nav-title" ng-if="whichPuzzle()==='pick-six'">
+					Six For A Spell
+				</div>
+				<div class="nav-subtitle" ng-if="whichPuzzle()==='pick-six'">
+					Based on game by Will Shortz of the NYT
+				</div>
+				<div class="nav-title" ng-if="whichPuzzle()==='spelling-bee'">
+					Spelling Bee
+				</div>
+				<div class="nav-subtitle" ng-if="whichPuzzle()==='spelling-bee'">
+					Based on game by Frank Longo of the NYT
+				</div>
+			</div>
+			<button class="rules-btn" ng-click="open()">
+				Rules
+			</button>
 		</div>
 	</div>
 </nav>
-<modal visible="showModal">
-	<modal-header title="New Album"></modal-header>
-	<modal-body>
-		Hello
+
+<modal visible="showModal" close="cancel()">
+	<modal-header ng-if="whichPuzzle()==='pick-six'" title="Six For A Spell Rules"></modal-header>
+	<modal-body ng-if="whichPuzzle()==='pick-six'">
+		How many common words of 6 or more letters can you find? Words must be spelled sequentially by following the lines connecting circles.  You may use a letter once -- but not twice in a row.  Click on letter to select letter.
+	</modal-body>
+	<modal-header ng-if="whichPuzzle()==='spelling-bee'" title="Spelling Bee Rules"></modal-header>
+	<modal-body ng-if="whichPuzzle()==='spelling-bee'">
+		How many common words of 5 or more letters can spell using the letters in the hive? Every answer must use the center letter at least once.  Letters may be reused in a word.  At least one word will use all 7 letters.  Proper names and hypenated words are not allowed.  Click on letter to select letter. 
 	</modal-body>
 </modal>

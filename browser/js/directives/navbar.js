@@ -11,11 +11,14 @@ app.directive('navbar', function ($state, $location) {
 				return path.startsWith(partial);
 			};
 
-			scope.isPickSix = function(){
+			scope.whichPuzzle = function(){
 				if ($location.path() === '/pick-six'){
-					return true;
+					return 'pick-six';
 				}
-				else{
+				else if($location.path() === '/spelling-bee'){
+					return 'spelling-bee';
+				}
+				else {
 					return false;
 				}
 			}
@@ -27,9 +30,8 @@ app.directive('navbar', function ($state, $location) {
 				else{
 					return false;
 				}
-			}
+			};
 
-			scope.showModal = false;
 			scope.open = function() {
 				scope.showModal = true;
 			};
@@ -40,7 +42,6 @@ app.directive('navbar', function ($state, $location) {
 
 			scope.cancel = function() {
 				scope.showModal = false;
-				console.log("dcjkds")
 			};
 		}
 	}

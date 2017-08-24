@@ -32,6 +32,7 @@ body {
 	height: 350px;
 	border-radius: 5px;
 	box-shadow: 0 0 30px #ccc;
+	cursor: pointer;
 }
 
 .icon img:hover {
@@ -303,7 +304,6 @@ button {
 	.icon img {
 		width: 200px;
     	height: 180px;
-    	cursor: pointer;
 	}
 
 	.icon h1 {

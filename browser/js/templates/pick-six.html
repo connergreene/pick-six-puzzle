@@ -3,7 +3,7 @@
 		<h1 class="title">SIX FOR A SPELL<h1>
 		<div class="subtitle">Based on game by Will Shortz of the New York Times</div>
 	</div>
-	<p>
+	<p class="directions">
 		How many common words of 6 or more letters can you find? Words must be spelled sequentially by following the lines connecting circles.  You may use a letter once -- but not twice in a row.  Click on letter to select letter.  There are <strong> {{ answerAmount }} </strong> more answers left.
 	</p>
 
@@ -28,7 +28,7 @@
 		<div ng-class="{correct: correctAnswers.includes(answer), incorrect: !correctAnswers.includes(answer)}" ng-repeat="answer in answers">{{ answer }}</div>
 	</div>
 </div>
-<div class="puzzle">
+<div class="six-puzzle">
 	<svg>
 		<g class="state-circle state-q0" ng-click="select(states['q0'])">
 			<line x1="30%" y1="50%" x2="5%" y2="50%"></line>

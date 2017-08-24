@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+  <base href="/">
+
+  <title>Times Games</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="app.css">
+  
+<!-- <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
+  <script src="/angular/angular.min.js"></script>
+  <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+
+  <script src="app.js"></script>
+  <script src="/js/controllers/pick-six.js"></script>
+  <script src="/js/controllers/spelling-bee.js"></script>
+  <script src="/js/states/pick-six.js"></script>
+  <script src="/js/states/spelling-bee.js"></script>
+  <script src="/js/states/home.js"></script>
+  <script src="/js/factories/checker.js"></script>
+  <script src="/js/directives/navbar.js"></script>
+  <script src="/js/directives/modal.js"></script>
+
+</head>
+
+<body ng-app="times-games">
+  <navbar></navbar>
+  <div id="main" class="container-fluid">
+    <ui-view></ui-view>
+  </div>
+</body>
+</html>

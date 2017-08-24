@@ -28,6 +28,20 @@ app.directive('navbar', function ($state, $location) {
 					return false;
 				}
 			}
+
+			scope.showModal = false;
+			scope.open = function() {
+				scope.showModal = true;
+			};
+
+			scope.ok = function() {
+				scope.showModal = false;
+			};
+
+			scope.cancel = function() {
+				scope.showModal = false;
+				console.log("dcjkds")
+			};
 		}
 	}
 });

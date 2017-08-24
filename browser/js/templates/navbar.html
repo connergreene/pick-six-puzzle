@@ -1,8 +1,26 @@
 <nav ng-if="!isHome()" class="navbar navbar-default">
 	<div class="container">
 		<div class="navbar-header">
-			<button ng-if="!isPickSix()" class="nav-btn btn-default" ui-sref="pick-six">Six For A Spell</button>
-			<button ng-if="isPickSix()" class="nav-btn btn-default" ui-sref="spelling-bee">Spelling Bee</button>
+			<!-- <button ng-if="!isPickSix()" class="nav-btn btn-default" ui-sref="pick-six">Six For A Spell</button>
+			<button ng-if="isPickSix()" class="nav-btn btn-default" ui-sref="spelling-bee">Spelling Bee</button> -->
+
+			<button class="nav-btn btn-default" ui-sref="home">Back</button>
+
+
+			<button class="add-btn" ng-click="toggleModal()">
+				<div>
+				Heelo
+				</div> 
+			<span class="glyphicon glyphicon-plus button-symbol"></span>
+			</button>
+      
+
 		</div>
 	</div>
 </nav>
+<modal visible="showModal">
+	<modal-header title="New Album"></modal-header>
+	<modal-body>
+		Hello
+	</modal-body>
+</modal>

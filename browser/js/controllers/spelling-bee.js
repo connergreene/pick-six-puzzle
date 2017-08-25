@@ -50,6 +50,11 @@ app.controller('spellingBeeCtrl', function ($scope, checkFactory) {
 		$scope.message = "";
 	};
 
+	$scope.backspace = function(){
+		$scope.guess = $scope.guess.slice(0, $scope.guess.length-1);
+		$scope.message = "";
+	};
+
 	$scope.submit = function(){
 		if($scope.guess.length < 5){
 			$scope.message = "Word must be 5 letters or more!";

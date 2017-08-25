@@ -144,11 +144,36 @@ app.controller('pickSixCtrl', function ($scope, checkFactory, $q) {
 		});
 	}
 
+	$scope.backspace = function(){
+		if($scope.guess.length>0){
+			$scope.guess = $scope.guess.slice(0, $scope.guess.length-1);
+			// var lastLetter = $scope.guess[$scope.guess.length-1];
+			$scope.clicked.pop();
+			var curr = $scope.clicked[$scope.clicked.length-1];
+			$scope.message = "";
+			clearStateColor();
+			if(curr){
+				makeOthersUnclickable(curr);
+				for(var i = 0; i < curr.transitions.length; i++){
+					var nextState = angular.element(document.querySelector('.state-'+ curr.transitions[i]));
+					nextState.css("fill", "grey");
+					$scope.states[curr.transitions[i]].clickable = true;
+				}
+				var currState = angular.element(document.querySelector('.state-'+ $scope.myPuzz.getKeyByValue(curr)));
+				currState.css("fill", "lightgreen");
+			}
+			else{
+				makeAllClickable();
+			}
+		}
+	};
+
 	$scope.clear = function(){
 		$scope.guess = "";
 		$scope.message = "";
 		makeAllClickable();
 		clearStateColor();
+		$scope.clicked = [];
 	};
 
 
@@ -179,13 +204,14 @@ app.controller('pickSixCtrl', function ($scope, checkFactory, $q) {
 				$scope.states[state].clickable = false;
 			}
 		}
-		//curr.clickable = true;
 	}
 
 	$scope.guess = "";
 	var addValue = function(val){
 		$scope.guess += val;
 	}
+
+	$scope.clicked = [];
 
 	$scope.select = function(curr){
 		if(curr.clickable){
@@ -200,6 +226,7 @@ app.controller('pickSixCtrl', function ($scope, checkFactory, $q) {
 			var currState = angular.element(document.querySelector('.state-'+ $scope.myPuzz.getKeyByValue(curr)));
 			currState.css("fill", "lightgreen");
 			addValue(curr.value);
+			$scope.clicked.push(curr);
 		}
 	}
 	
@@ -232,6 +259,7 @@ app.controller('pickSixCtrl', function ($scope, checkFactory, $q) {
 		$scope.answers = $scope.myPuzz.answerKey;
 		$scope.showAnswers = true;
 		$scope.guess = "";
+		$scope.clicked = [];
 		makeAllUnclickable();
 	}
 

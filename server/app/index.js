@@ -91,7 +91,7 @@ app.use('/auth', require('../auth/auth.router'));
 app.use('/api', require('../api/api.router'));
 
 
-var validFrontendRoutes = ['/', '/users', '/users/:id', '/pick-six', '/spelling-bee'];
+var validFrontendRoutes = ['/', '/users', '/users/:id', '/home', '/pick-six', '/spelling-bee', '/login', '/signup'];
 var indexPath = path.join(__dirname, '..', '..', 'public', 'index.html');
 validFrontendRoutes.forEach(function (stateRoute) {
   app.get(stateRoute, function (req, res) {

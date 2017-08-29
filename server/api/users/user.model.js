@@ -23,6 +23,9 @@ var User = new mongoose.Schema({
 	salt: {
         type: String
     },
+    puzzles: {
+    	type: Object
+    },
 	isAdmin: {
 		type: Boolean,
 		default: false

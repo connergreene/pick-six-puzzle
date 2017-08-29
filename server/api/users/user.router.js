@@ -25,7 +25,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-	UserModel.create(req.body)
+	User.create(req.body)
 		.then(user => {
 			req.logIn(user, function(loginErr) {
 				if (loginErr) return next(loginErr);

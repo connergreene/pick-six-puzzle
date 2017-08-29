@@ -2,7 +2,7 @@
 app.config(function ($stateProvider) {
 	$stateProvider.state('spelling-bee', {
 		url: '/spelling-bee',
-		templateUrl: 'js/templates/spelling-bee.html',
+		templateUrl: 'browser/js/templates/spelling-bee.html',
 		controller: 'spellingBeeCtrl'
 	});
 });

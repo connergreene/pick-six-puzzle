@@ -55,7 +55,6 @@ app.controller('spellingBeeCtrl', function ($scope, checkFactory, spellingBee) {
 		$scope.message = "";
 		$scope.myPuzz.getAnswerKey()
 		.then(function(answers){
-			$scope.myPuzz.answerKey = answers;
 			if(answers.length >= 10){
 				var i = 0;
 				$scope.allLetterWords = [];
@@ -69,6 +68,7 @@ app.controller('spellingBeeCtrl', function ($scope, checkFactory, spellingBee) {
 					$scope.makeFullPuzz();
 				}
 				else{
+					$scope.myPuzz.answerKey = answers;
 					$scope.answerAmount = answers.length;
 				}
 			}

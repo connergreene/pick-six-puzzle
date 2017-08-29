@@ -1,7 +1,7 @@
 'use strict'
 app.directive('modal', function(){
     return {
-        templateUrl: 'js/templates/modal.html', 
+        templateUrl: 'browser/js/templates/modal.html', 
         restrict: 'E',
         transclude: true,
         replace:true,

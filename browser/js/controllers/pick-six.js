@@ -1,5 +1,5 @@
 'use strict'
-app.controller('pickSixCtrl', function ($scope, pickSix, checkFactory, $q) {
+app.controller('pickSixCtrl', function ($scope, pickSix, checkFactory, $q, UserFactory, Auth, PickSixFactory) {
 	
 	$scope.backspace = function(){
 		if($scope.guess.length>0){
@@ -91,12 +91,12 @@ app.controller('pickSixCtrl', function ($scope, pickSix, checkFactory, $q) {
 		if($scope.guess.length < 6){
 			$scope.message = "Word must be 6 letters or more!";
 		}
-		else if ($scope.correctAnswers.includes($scope.guess)){
+		else if ($scope.myPuzz.correctAnswers.includes($scope.guess)){
 			$scope.message = "Already guessed this!";
 			$scope.clear();
 		}
 		else if ($scope.myPuzz.answerKey.includes($scope.guess)){
-			$scope.correctAnswers.push($scope.guess);
+			$scope.myPuzz.correctAnswers.push($scope.guess);
 			$scope.clear();
 			$scope.answerAmount--;
 			if($scope.answerAmount === 0){
@@ -110,6 +110,22 @@ app.controller('pickSixCtrl', function ($scope, pickSix, checkFactory, $q) {
 		
 	}
 
+	$scope.user = null;
+	$scope.save = function(){
+		$scope.savedInfo = {};
+		Auth.getCurrentUser()
+        .then(function (user) {
+            $scope.user = user;
+            $scope.savedInfo.states = $scope.myPuzz.states;
+            $scope.savedInfo.correctAnswers = $scope.myPuzz.correctAnswers;
+            $scope.savedInfo.owner = user._id;
+            PickSixFactory.create($scope.savedInfo);
+        })
+        .then(function(){
+        	console.log(PickSixFactory.fetchByOwner($scope.savedInfo.owner))
+        })
+
+	}
 	$scope.endGame = function(){
 		$scope.message = "";
 		$scope.answers = $scope.myPuzz.answerKey;
@@ -124,7 +140,7 @@ app.controller('pickSixCtrl', function ($scope, pickSix, checkFactory, $q) {
 		$scope.myPuzz = new pickSix;
 		$scope.myPuzz.generatePuzzle();
 		$scope.states = $scope.myPuzz.states;
-		$scope.correctAnswers = [];
+		$scope.myPuzz.correctAnswers = [];
 		$scope.showAnswers = false;
 		$scope.message = "";
 		$scope.myPuzz.getAnswerKey().then(function(answers){

@@ -8,11 +8,6 @@ var mongoose = require('mongoose'),
 var db = require('../../db');
 
 var User = new mongoose.Schema({
-	_id: {
-		type: String,
-		unique: true,
-		default: shortid.generate
-	},
 	name: String,
 	email: {
 		type: String,
@@ -22,9 +17,6 @@ var User = new mongoose.Schema({
 	password: String,
 	salt: {
         type: String
-    },
-    puzzles: {
-    	type: Object
     },
 	isAdmin: {
 		type: Boolean,

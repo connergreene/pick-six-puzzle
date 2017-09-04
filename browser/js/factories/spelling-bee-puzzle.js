@@ -4,9 +4,11 @@ app.factory('spellingBee', function (checkFactory) {
 	function Puzzle(){
 		this.letters = "";
 	 	this.answerKey = [];
+	 	this.correctAnswers = [];
 	}
 
 	Puzzle.prototype.generatePuzzle = function(){
+
 		var consonants = "BCDFGHJKLMNPQRSTVWXYZ";
 		var vowels = "AEIOU";
 

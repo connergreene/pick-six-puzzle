@@ -3,6 +3,8 @@
 var app = require('express')();
 var path = require('path');
 var User = require('../api/users/user.model');
+var PickSix = require('../api/pick-six/pick-six.model');
+var SpellingBee = require('../api/spelling-bee/spelling-bee.model');
 var request = require('request');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -20,7 +22,7 @@ app.use(require('./logging.middleware'));
 
 app.use(require('./requestState.middleware'));
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
  
 app.use(bodyParser.json({ type: 'application/*+json' }))
 

@@ -1,13 +1,14 @@
 'use strict';
 
-var router = require('express').Router(),
-	_ = require('lodash');
-
+var router = require('express').Router()
+var _ = require('lodash');
 var HttpError = require('../../utils/HttpError');
-var User = require('./user.model');
+var userModel = require('./user.model');
+var pickSixModel = require('../pick-six/pick-six.model');
+var spellingBeeModel = require('../spelling-bee/spelling-bee.model');
 
 router.param('id', function (req, res, next, id) {
-	User.findById(id).exec()
+	userModel.findById(id).exec()
 	.then(function (user) {
 		if (!user) throw HttpError(404);
 		req.requestedUser = user;
@@ -17,7 +18,7 @@ router.param('id', function (req, res, next, id) {
 });
 
 router.get('/', function (req, res, next) {
-	User.find({}).exec()
+	userModel.find({}).exec()
 	.then(function (users) {
 		res.json(users);
 	})
@@ -25,7 +26,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-	User.create(req.body)
+	userModel.create(req.body)
 		.then(user => {
 			req.logIn(user, function(loginErr) {
 				if (loginErr) return next(loginErr);
@@ -38,7 +39,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.get('/me', function(req, res, next){
-	User.findById(req.session.userId).exec()
+	userModel.findById(req.session.userId).exec()
 	.then(function(loggedInUser){
 		res.json(loggedInUser)
 	})
@@ -46,12 +47,18 @@ router.get('/me', function(req, res, next){
 })
 
 router.get('/:id', function (req, res, next) {
-	req.requestedUser.getStories()
-	.then(function (stories) {
-		var obj = req.requestedUser.toObject();
-		obj.stories = stories;
-		res.json(obj);
-	})
+	res.status(200).json(req.requestedUser);
+});
+
+router.get('/:id/pick-sixes', function (req, res, next) {
+	pickSixModel.findPickSixByOwner(req.params.id)
+	.then(pickSixes => res.json(pickSixes))
+	.then(null, next);
+});
+
+router.get('/:id/spelling-bees', function (req, res, next) {
+	spellingBeeModel.findSpellingBeeByOwner(req.params.id)
+	.then(spellingBees => res.json(spellingBees))
 	.then(null, next);
 });
 

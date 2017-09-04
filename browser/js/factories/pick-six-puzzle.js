@@ -19,6 +19,7 @@ app.factory('pickSix', function (checkFactory) {
 	 	};
 
 	 	this.answerKey = [];
+	 	this.correctAnswers = [];
 	}
 
 	Puzzle.prototype.generatePuzzle = function(){

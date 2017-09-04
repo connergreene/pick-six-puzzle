@@ -1,5 +1,5 @@
 'use strict'
-app.controller('spellingBeeCtrl', function ($scope, checkFactory, spellingBee) {
+app.controller('spellingBeeCtrl', function ($scope, checkFactory, spellingBee, UserFactory, SpellingBeeFactory, Auth) {
 	
 	$scope.guess = "";
 	$scope.addValue = function(val){
@@ -20,12 +20,12 @@ app.controller('spellingBeeCtrl', function ($scope, checkFactory, spellingBee) {
 		if($scope.guess.length < 5){
 			$scope.message = "Word must be 5 letters or more!";
 		}
-		else if ($scope.correctAnswers.includes($scope.guess)){
+		else if ($scope.myPuzz.correctAnswers.includes($scope.guess)){
 			$scope.message = "Already guessed this!";
 			$scope.clear();
 		}
 		else if ($scope.myPuzz.answerKey.includes($scope.guess)){
-			$scope.correctAnswers.push($scope.guess);
+			$scope.myPuzz.correctAnswers.push($scope.guess);
 			$scope.clear();
 			$scope.answerAmount--;
 			if($scope.answerAmount === 0){
@@ -39,6 +39,23 @@ app.controller('spellingBeeCtrl', function ($scope, checkFactory, spellingBee) {
 		
 	}
 
+	$scope.user = null;
+	$scope.save = function(){
+		$scope.savedInfo = {};
+		Auth.getCurrentUser()
+        .then(function (user) {
+            $scope.user = user;
+            $scope.savedInfo.letters = $scope.myPuzz.letters;
+            $scope.savedInfo.correctAnswers = $scope.myPuzz.correctAnswers;
+            $scope.savedInfo.owner = user._id;
+            SpellingBeeFactory.create($scope.savedInfo);
+        })
+        .then(function(){
+        	console.log(SpellingBeeFactory.fetchByOwner($scope.savedInfo.owner))
+        })
+
+	}
+
 	$scope.endGame = function(){
 		$scope.message = "";
 		$scope.answers = $scope.myPuzz.answerKey;
@@ -50,7 +67,7 @@ app.controller('spellingBeeCtrl', function ($scope, checkFactory, spellingBee) {
 		$scope.clear();
 		$scope.myPuzz = new spellingBee;
 		$scope.myPuzz.generatePuzzle();
-		$scope.correctAnswers = [];
+		$scope.myPuzz.correctAnswers = [];
 		$scope.showAnswers = false;
 		$scope.message = "";
 		$scope.myPuzz.getAnswerKey()

@@ -10,6 +10,7 @@
 	<div class="buttons-top">
 		<button id="new-btn" ng-click="makeFullPuzz()">New Puzzle</button>
 		<button id="end-btn" ng-hide="showAnswers" ng-click="endGame()">Give Up</button>
+		<button id="new-btn" ng-hide="showAnswers" ng-click="save()">Save</button>
 	</div>
 	<div class="guess">
 		<h1> {{ guess }} </h1>
@@ -25,10 +26,10 @@
 		{{ message }} 
 	</p>
 	<div ng-hide="showAnswers" class="correct-guesses">
-		<div ng-repeat="correctAnswer in correctAnswers ">{{ correctAnswer }}</div>
+		<div ng-repeat="correctAnswer in myPuzz.correctAnswers ">{{ correctAnswer }}</div>
 	</div>
 	<div ng-show="showAnswers" class="answers">
-		<div ng-class="{correct: correctAnswers.includes(answer), incorrect: !correctAnswers.includes(answer)}" ng-repeat="answer in answers">{{ answer }}</div>
+		<div ng-class="{correct: myPuzz.correctAnswers.includes(answer), incorrect: !myPuzz.correctAnswers.includes(answer)}" ng-repeat="answer in answers">{{ answer }}</div>
 	</div>
 </div>
 <div class="six-puzzle">

@@ -1,21 +1,19 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
+var HttpError = require('../../utils/HttpError');
 var userModel = require('../users/user.model');
 var pickSixModel = require('./pick-six.model');
+var sowpods = require('pf-sowpods');
+
 
 router.param('id', function (req, res, next, id) {
-    pickSixModel.findById(id)
-        .populate('owner')
-        .then(pickSix => {
-            if (!pickSix) {
-                var err = new Error('pickSix not found');
-                err.status = 404;
-                return next(err);
-            }
-            req.pickSix = pickSix;
-            next();
-        })
-        .then(null, next);
+    pickSixModel.findById(id).exec()
+    .then(function (pickSix) {
+      if (!pickSix) throw HttpError(404);
+      req.pickSix = pickSix;
+      next();
+    })
+    .then(null, next);
 });
 
 var ensureOwner = function (req, res, next) {
@@ -32,7 +30,7 @@ var ensureOwner = function (req, res, next) {
 
 router.get('/', (req, res, next) => {
 
-    pickSixModel.find().populate('class owner')
+    pickSixModel.find().populate('owner')
         .then(pickSixes => {
             res.send(pickSixes);
         })
@@ -40,9 +38,24 @@ router.get('/', (req, res, next) => {
 
 });
 
-router.get('/:id', (req, res, next) => {
-    res.json(req.pickSix);
+router.get('/:id', function (req, res, next) {
+  res.status(200).json(req.pickSix);
 });
+
+router.get('/check/:letters', function(req, res, next){
+  var letters = '';
+  for(var i = 0; i < 6; i++){
+    letters+=req.params.letters;
+  }
+  var words = sowpods.anagram(letters);
+  var results = [];
+  for (var i = 0; i < words.length; i++){
+    if(words[i].length>=6){
+      results.push(words[i])
+    }
+  }
+  res.send(results);
+})
 
 router.post('/', (req, res, next) => {
 
@@ -51,7 +64,7 @@ router.post('/', (req, res, next) => {
         .then(null, next);
 });
 
-router.put('/:id', ensureOwner, (req, res, next) => {
+router.put('/:id', (req, res, next) => {
 
     pickSixModel.findByIdAndUpdate(req.params.id,
             req.body, { new: true }).exec()

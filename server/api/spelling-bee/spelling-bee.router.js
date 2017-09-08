@@ -1,21 +1,18 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
+var HttpError = require('../../utils/HttpError');
 var userModel = require('../users/user.model');
 var spellingBeeModel = require('./spelling-bee.model');
+var sowpods = require('pf-sowpods');
 
 router.param('id', function (req, res, next, id) {
-    spellingBeeModel.findById(id)
-        .populate('owner')
-        .then(spellingBee => {
-            if (!spellingBee) {
-                var err = new Error('spellingBee not found');
-                err.status = 404;
-                return next(err);
-            }
-            req.spellingBee = spellingBee;
-            next();
-        })
-        .then(null, next);
+  spellingBeeModel.findById(id).exec()
+  .then(function (spellingBee) {
+    if (!spellingBee) throw HttpError(404);
+    req.spellingBee = spellingBee;
+    next();
+  })
+  .then(null, next);
 });
 
 var ensureOwner = function (req, res, next) {
@@ -45,6 +42,21 @@ router.get('/:id', (req, res, next) => {
     res.json(req.spellingBee);
 });
 
+router.get('/check/:letters', function(req, res, next){
+  var letters = '';
+  for(var i = 0; i < 10; i++){
+    letters+=req.params.letters;
+  }
+  var words = sowpods.anagram(letters);
+  var results = [];
+  for (var i = 0; i < words.length; i++){
+    if(words[i].length >= 5 && words[i].includes(letters[0])){
+      results.push(words[i])
+    }
+  }
+  res.send(results);
+})
+
 router.post('/', (req, res, next) => {
     
     spellingBeeModel.create(req.body)
@@ -52,7 +64,7 @@ router.post('/', (req, res, next) => {
         .then(null, next);
 });
 
-router.put('/:id', ensureOwner, (req, res, next) => {
+router.put('/:id', (req, res, next) => {
 
     spellingBeeModel.findByIdAndUpdate(req.params.id,
             req.body, { new: true }).exec()

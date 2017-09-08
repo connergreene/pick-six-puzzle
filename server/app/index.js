@@ -14,7 +14,6 @@ var passport = require('passport');
 var session = require('express-session');
 var server = require('http').Server(app);
 var MongoStore = require('connect-mongo')(session);
-var sowpods = require('pf-sowpods');
 
 app.use(cookieParser());
 
@@ -22,9 +21,9 @@ app.use(require('./logging.middleware'));
 
 app.use(require('./requestState.middleware'));
 
-app.use(bodyParser.urlencoded({ extended: true }))
- 
 app.use(bodyParser.json({ type: 'application/*+json' }))
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
   secret: 'puzz',
@@ -53,52 +52,17 @@ app.get('/session', function (req, res) {
     }
 });
 
-app.get('/pick-six/:letters', function(req, res, next){
-  var letters = '';
-  for(var i = 0; i < 6; i++){
-    letters+=req.params.letters;
-  }
-  var words = sowpods.anagram(letters);
-  var results = [];
-  for (var i = 0; i < words.length; i++){
-    if(words[i].length>=6){
-      results.push(words[i])
-      // if(words[i][0] === "D" && words[i][1] === "O"){
-      //   console.log(words[i])
-      // }
-    }
-  }
-  res.send(results);
-})
-
-app.get('/spelling-bee/:letters', function(req, res, next){
-  var letters = '';
-  for(var i = 0; i < 10; i++){
-    letters+=req.params.letters;
-  }
-  var words = sowpods.anagram(letters);
-  var results = [];
-  for (var i = 0; i < words.length; i++){
-    if(words[i].length >= 5 && words[i].includes(letters[0])){
-      results.push(words[i])
-    }
-  }
-  res.send(results);
-})
-
 app.use(require('./statics.middleware'));
  
 app.use('/auth', require('../auth/auth.router'));
 
 app.use('/api', require('../api/api.router'));
 
+var rootPath = path.join(__dirname, '../../');
+var indexPath = path.join(rootPath, 'public', 'index.html');
 
-var validFrontendRoutes = ['/', '/users', '/users/:id', '/home', '/pick-six', '/spelling-bee', '/login', '/signup'];
-var indexPath = path.join(__dirname, '..', '..', 'public', 'index.html');
-validFrontendRoutes.forEach(function (stateRoute) {
-  app.get(stateRoute, function (req, res) {
+app.get('/*', function (req, res) {
     res.sendFile(indexPath);
-  });
 });
 
 app.use(require('./error.middleware'));

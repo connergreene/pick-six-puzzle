@@ -39,8 +39,6 @@ app.directive('navbar', function ($rootScope, $state, $location, Auth, AUTH_EVEN
 				scope.showModal = false;
 			};
 
-			scope.user = null;
-
             scope.isLoggedIn = function () {
                 return Auth.isAuthenticated();
             };
@@ -67,7 +65,7 @@ app.directive('navbar', function ($rootScope, $state, $location, Auth, AUTH_EVEN
 				.then(function(){
 					$state.go('login')
 				}, function(){
-					$scope.userData = {}
+					scope.userData = {}
 				})
 			}
 

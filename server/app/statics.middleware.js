@@ -14,7 +14,6 @@ router.use(express.static(rootPath));
 
 router.use(express.static(publicPath));
 
-
 router.use(express.static(npmPath));
 
 module.exports = router;

@@ -1,8 +1,26 @@
-
-
-<div>
-	{{ pickSixes }}
+<h1>My Six For A Spells</h1>
+<div class="pick-six-collection">
+	<div class="saved-pick-six" ng-repeat="pickSix in pickSixes">
+		<picksix ui-sref="saved-pick-six({id: pickSix._id})" states="pickSix.states"></picksix>
+		<div class="progress-wrapper">
+			<uib-progressbar class="progress active" max="pickSix.answerKeySize" value="pickSix.correctAnswers.length">
+			<i class="progress-text">
+				{{ pickSix.correctAnswers.length }} / {{ pickSix.answerKeySize}}
+			</i>
+			</uib-progressbar>
+		</div>
+	</div>
 </div>
-<div>
-	{{ spellingBees }}
+<h1>My Spelling Bees</h1>
+<div class="spelling-bee-collection">
+	<div class="saved-spelling-bee" ng-repeat="spellingBee in spellingBees">
+		<spellingbee ui-sref="saved-spelling-bee({id: spellingBee._id})" letters="spellingBee.letters"></spellingbee>
+		<div class="progress-wrapper">
+			<uib-progressbar class="progress active" max="spellingBee.answerKeySize" value="spellingBee.correctAnswers.length">
+				<i class="progress-text">
+					{{ spellingBee.correctAnswers.length }} / {{ spellingBee.answerKeySize}}
+				</i>
+			</uib-progressbar>
+		</div>
+	</div>
 </div>

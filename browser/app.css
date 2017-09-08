@@ -254,6 +254,81 @@ button {
     fill: rgba(128,128,128,0.3);
 }
 
+.pick-six-collection {
+	height: 200px;
+	overflow: scroll;
+    direction: rtl;
+}
+
+picksix svg {
+	width: 300px;
+	height: 160px;
+}
+
+picksix svg text {
+	font-size: 15px;
+}
+
+.saved-pick-six {
+	border-radius: 5px;
+    box-shadow: 0 0 30px #ccc;
+    cursor: pointer;
+	background-color: white;
+    width: 180px;
+    height: 160px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 40px;
+}
+
+.saved-pick-six:hover {
+	box-shadow: 0px 0px 30px black;
+}
+
+.spelling-bee-collection {
+	height: 200px;
+}
+
+.spelling-bee-icon {
+	width: 142px;
+	margin: 9px auto 0px auto;
+}
+
+.spelling-bee-icon svg {
+	text-anchor: middle;
+	height: 100%;
+}
+
+.spelling-bee-icon svg text{
+	font-size: 20px;
+}
+
+.saved-spelling-bee {
+	border-radius: 5px;
+    box-shadow: 0 0 30px #ccc;
+    cursor: pointer;
+	background-color: white;
+    width: 180px;
+    height: 160px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 40px;
+}
+
+.saved-spelling-bee:hover {
+	box-shadow: 0px 0px 30px black;
+}
+
+.progress {
+	position: relative;
+}
+
+.progress-text {
+	position: absolute;
+    display: block;
+    width: 100%;
+	color: black;
+}
 
 @media screen and (max-width : 830px), screen and (max-device-width : 1000px) {
 

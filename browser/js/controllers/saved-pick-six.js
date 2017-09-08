@@ -1,6 +1,17 @@
 'use strict'
-app.controller('pickSixCtrl', function ($scope, $state, pickSix, checkFactory, $q, UserFactory, Auth, PickSixFactory) {
+app.controller('savedPickSixCtrl', function ($scope, pickSix, checkFactory, $q, UserFactory, Auth, PickSixFactory, savedPickSix) {
 	
+	$scope.myPuzz = new pickSix;
+	$scope.myPuzz.states = savedPickSix.states;
+	$scope.states = savedPickSix.states;
+	$scope.myPuzz.correctAnswers = savedPickSix.correctAnswers;
+	$scope.showAnswers = false;
+	$scope.message = "";
+	$scope.myPuzz.getAnswerKey().then(function(answers){
+		$scope.myPuzz.answerKey = answers;
+		$scope.answerAmount = answers.length;
+	});
+
 	$scope.backspace = function(){
 		if($scope.guess.length>0){
 			$scope.guess = $scope.guess.slice(0, $scope.guess.length-1);
@@ -110,23 +121,14 @@ app.controller('pickSixCtrl', function ($scope, $state, pickSix, checkFactory, $
 		
 	}
 
-	$scope.user = null;
 	$scope.save = function(){
-		$scope.savedInfo = {};
-		Auth.getCurrentUser()
-        .then(function (user) {
-            $scope.user = user;
-            $scope.savedInfo.states = $scope.myPuzz.states;
-            $scope.savedInfo.correctAnswers = $scope.myPuzz.correctAnswers;
-            $scope.savedInfo.owner = user._id;
-            $scope.savedInfo.answerKeySize = $scope.answerAmount;
-            PickSixFactory
-            .create($scope.savedInfo)
-            .then(function(savedPuzz){
-            	$state.go('saved-pick-six', {id : savedPuzz._id});
-            });
-        })
+		var savedInfo = {};
+		savedInfo._id = savedPickSix._id;
+		savedInfo.correctAnswers = $scope.myPuzz.correctAnswers;
+		PickSixFactory.update(savedPickSix);
+
 	}
+	
 	$scope.endGame = function(){
 		$scope.message = "";
 		$scope.answers = $scope.myPuzz.answerKey;
@@ -136,25 +138,5 @@ app.controller('pickSixCtrl', function ($scope, $state, pickSix, checkFactory, $
 		makeAllUnclickable();
 	}
 
-	$scope.makeFullPuzz = function(){
-		$scope.clear();
-		$scope.myPuzz = new pickSix;
-		$scope.myPuzz.generatePuzzle();
-		$scope.states = $scope.myPuzz.states;
-		$scope.myPuzz.correctAnswers = [];
-		$scope.showAnswers = false;
-		$scope.message = "";
-		$scope.myPuzz.getAnswerKey().then(function(answers){
-			if(answers.length < 20){
-				$scope.makeFullPuzz();
-			}
-			else{
-				$scope.myPuzz.answerKey = answers;
-				$scope.answerAmount = answers.length;
-			}
-		});
-		return;
-	}
 
-	$scope.makeFullPuzz();
 });

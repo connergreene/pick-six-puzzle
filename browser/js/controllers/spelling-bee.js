@@ -1,5 +1,5 @@
 'use strict'
-app.controller('spellingBeeCtrl', function ($scope, checkFactory, spellingBee, UserFactory, SpellingBeeFactory, Auth) {
+app.controller('spellingBeeCtrl', function ($scope, $state, checkFactory, spellingBee, UserFactory, SpellingBeeFactory, Auth) {
 	
 	$scope.guess = "";
 	$scope.addValue = function(val){
@@ -48,12 +48,13 @@ app.controller('spellingBeeCtrl', function ($scope, checkFactory, spellingBee, U
             $scope.savedInfo.letters = $scope.myPuzz.letters;
             $scope.savedInfo.correctAnswers = $scope.myPuzz.correctAnswers;
             $scope.savedInfo.owner = user._id;
-            SpellingBeeFactory.create($scope.savedInfo);
+            $scope.savedInfo.answerKeySize = $scope.answerAmount;
+            SpellingBeeFactory
+            .create($scope.savedInfo)
+            .then(function(savedPuzz){
+            	$state.go('saved-spelling-bee', {id : savedPuzz._id});
+            });
         })
-        .then(function(){
-        	console.log(SpellingBeeFactory.fetchByOwner($scope.savedInfo.owner))
-        })
-
 	}
 
 	$scope.endGame = function(){

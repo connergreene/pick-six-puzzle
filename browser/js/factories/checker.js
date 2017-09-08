@@ -4,7 +4,7 @@ app.factory('checkFactory', function($http) {
 	return {
 		checkPickSix(letters) {
 			return $http({
-				url: '/pick-six/' + letters,
+				url: '/api/pick-six/check/' + letters,
 				method: 'GET'
 			})
 			.then(res => res.data);
@@ -12,7 +12,7 @@ app.factory('checkFactory', function($http) {
 
 		checkSpellingBee(letters) {
 			return $http({
-				url: '/spelling-bee/' + letters,
+				url: '/api/spelling-bee/check/' + letters,
 				method: 'GET'
 			})
 			.then(res => res.data);

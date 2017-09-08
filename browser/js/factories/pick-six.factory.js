@@ -10,6 +10,14 @@ app.factory('PickSixFactory', function ($http) {
             .then(res => res.data);
         },
 
+        fetchById (puzzId) {
+            return $http({
+                url: '/api/pick-six/' + puzzId,
+                method: 'GET'
+            })
+            .then(res => res.data);
+        },
+
         fetchByOwner (userId) {
             return $http({
                 url: '/api/users/' + userId + '/pick-sixes',

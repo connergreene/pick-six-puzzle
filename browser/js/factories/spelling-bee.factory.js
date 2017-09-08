@@ -10,6 +10,14 @@ app.factory('SpellingBeeFactory', function ($http) {
             .then(res => res.data);
         },
 
+        fetchById (puzzId) {
+            return $http({
+                url: '/api/spelling-bee/' + puzzId,
+                method: 'GET'
+            })
+            .then(res => res.data);
+        },
+
         fetchByOwner (userId) {
             return $http({
                 url: '/api/users/' + userId + '/spelling-bees',

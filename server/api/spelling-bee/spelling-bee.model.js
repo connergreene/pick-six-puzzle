@@ -10,7 +10,10 @@ var schema = new mongoose.Schema({
     },
     correctAnswers: [{
         type: String
-    }]
+    }],
+    answerKeySize: {
+        type: Number
+    }
 });
 
 schema.statics.findSpellingBeeByOwner = function (userId) {

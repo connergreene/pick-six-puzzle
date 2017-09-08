@@ -33,8 +33,8 @@ router.post('/', function (req, res, next) {
 				res.status(200).send(
 					user.sanitize()
 				);
-		});
-	})
+			});
+		})
 	.then(null, next);
 });
 

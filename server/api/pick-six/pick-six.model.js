@@ -11,7 +11,10 @@ var schema = new mongoose.Schema({
     },
     correctAnswers: [{
         type: String
-    }]
+    }],
+    answerKeySize: {
+        type: Number
+    }
 });
 
 schema.statics.findPickSixByOwner = function (userId) {

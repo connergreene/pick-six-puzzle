@@ -42,6 +42,7 @@ body {
 .navbar-header {
 	position: relative;
     top: 7px;
+    float: right;
 }
 
 .navbar-header button {
@@ -257,7 +258,7 @@ button {
 .pick-six-collection {
 	height: 200px;
 	overflow: scroll;
-    direction: rtl;
+    /*direction: rtl;*/
 }
 
 picksix svg {
@@ -328,6 +329,47 @@ picksix svg text {
     display: block;
     width: 100%;
 	color: black;
+}
+
+/*log in page*/
+.login-modal .modal-content {
+	margin-top: 50%;
+}
+
+.guest-btn {
+	float: left;
+}
+
+.modal-header {
+	text-align: center;
+}
+
+.modal-body button {
+	color: white;
+	background-color: black;
+}
+
+.modal-footer{
+	text-align: center;
+}
+
+.modal-signup-btn {
+	cursor: pointer;
+}
+
+/*signup page*/
+.signup-container {
+	margin: 10% auto;
+    width: 372px;
+}
+
+.signup-container h1 {
+	font-size: 30px
+}
+
+.home-btn {
+	font-size: 30px;
+	cursor: pointer;
 }
 
 @media screen and (max-width : 830px), screen and (max-device-width : 1000px) {
@@ -494,12 +536,22 @@ picksix svg text {
 		r: 25px;
 
 	}
+
+	.login-modal .modal-content {
+		margin-top: 0%;
+	}
 }
 
 @media screen and (max-width : 460px), screen and (max-device-width : 460px) {
 	.six-puzzle {
 		right: -5%;
 	}
+
+	.signup-container {
+		margin-top: 40%;
+	    width: 80%;
+	}
+
 }
 
 @media screen and (max-width : 390px), screen and (max-device-width : 390px) {

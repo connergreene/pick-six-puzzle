@@ -1,10 +1,11 @@
-<nav ng-if="whichPage()!=='home' || whichPage()" class="navbar navbar-default">
-	<div class="container">
+<nav ng-if="showNav()" class="navbar navbar-default">
+	<div ng-style="whichPage()==='signup' ? { 'display': 'flex',
+    'justify-content': 'center' } : { 'display': 'inherit' }" class="container">
 		<div class="navbar-header">
-			<button ng-if="whichPage()!=='home'" class="back-btn" ui-sref="home">
-				Back
-			</button>
-			<button ng-if="whichPage()==='home'" class="back-btn" ng-click="myPuzzles()">
+			<div ng-if="whichPage()!=='home'" class="home-btn" ui-sref="home">
+				Times Games
+			</div>
+			<button ng-if="whichPage()==='home' && isLoggedIn()" class="back-btn" ng-click="myPuzzles()">
 				My Puzzles
 			</button>
 			<div class="title-wrap">
@@ -21,6 +22,12 @@
 					Based on game by Frank Longo of the NYT
 				</div>
 			</div>
+			<button class="signup-btn" ui-sref="signup" ng-if="whichPage() === 'home'">
+				Sign Up
+			</button>
+			<button class="login-btn" ng-if="whichPage() === 'home'" ng-click="openLogin()">
+				Log In
+			</button>
 			<button ng-if="whichPage()!=='home'" class="rules-btn" ng-click="open()">
 				Rules
 			</button>
@@ -40,4 +47,26 @@
 	<modal-body ng-if="whichPage()==='spelling-bee'">
 		How many common words of 5 or more letters can spell using the letters in the hive? Every answer must use the center letter at least once.  Letters may be reused in a word.  At least one word will use all 7 letters.  Proper names and hypenated words are not allowed.  Click on letter to select letter. 
 	</modal-body>
+</modal>
+
+
+<modal class="login-modal" visible="showLoginModal" close="loginCancel()">
+	<modal-header title="Log in to The Times Games"></modal-header>
+	<modal-body>
+		<div class="buffer local">
+			<form ng-submit="submitLogin()">
+				<div class="form-group">
+					<input ng-model="userData.email" type="text" class="form-control" placeholder="Enter email" required />
+				</div>
+				<div class="form-group">
+					<input ng-model="userData.password" type="password" class="form-control" placeholder="Enter password" required />
+				</div>
+				<button type="submit" class="btn btn-block">login</button>
+			</form>
+		</div>
+	</modal-body>
+	<modal-footer>
+		Don't have an account? 
+		<a ng-click="signupPage()" class="modal-signup-btn">Sign up »</a>
+	</modal-footer>
 </modal>

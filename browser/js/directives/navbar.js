@@ -11,6 +11,15 @@ app.directive('navbar', function ($rootScope, $state, $location, Auth, AUTH_EVEN
 				return path.startsWith(partial);
 			};
 
+			scope.showNav = function(){
+				if ($location.path() === '/login'){
+					return false;
+				}
+				else {
+					return true;
+				}
+
+			}
 			scope.whichPage = function(){
 				if ($location.path() === '/pick-six'){
 					return 'pick-six';
@@ -18,7 +27,10 @@ app.directive('navbar', function ($rootScope, $state, $location, Auth, AUTH_EVEN
 				else if($location.path() === '/spelling-bee'){
 					return 'spelling-bee';
 				}
-				else if($location.path() === '/home'){
+				else if($location.path() === '/signup'){
+					return 'signup';
+				}
+				else if($location.path() === '/'){
 					return 'home';
 				}
 				else {
@@ -37,6 +49,18 @@ app.directive('navbar', function ($rootScope, $state, $location, Auth, AUTH_EVEN
 
 			scope.cancel = function() {
 				scope.showModal = false;
+			};
+
+			scope.openLogin = function() {
+				scope.showLoginModal = true;
+			};
+
+			scope.loginOk = function() {
+				scope.showLoginModal = false;
+			};
+
+			scope.loginCancel = function() {
+				scope.showLoginModal = false;
 			};
 
             scope.isLoggedIn = function () {
@@ -63,10 +87,26 @@ app.directive('navbar', function ($rootScope, $state, $location, Auth, AUTH_EVEN
 			scope.logOut = function(){
 				Auth.logout()
 				.then(function(){
-					$state.go('login')
+					$state.go('home')
 				}, function(){
 					scope.userData = {}
 				})
+			}
+
+			scope.userData = {};
+			scope.submitLogin = function(){
+				Auth.login(scope.userData)
+				.then(function(){
+					$state.go('home')
+				}, function(){
+					scope.userData = {}
+					scope.showLoginModal = false;
+				})
+			}
+
+			scope.signupPage = function(){
+				scope.showLoginModal = false;
+				$state.go('signup');
 			}
 
 			scope.myPuzzles = function(){

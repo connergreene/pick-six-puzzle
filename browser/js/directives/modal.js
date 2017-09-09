@@ -70,3 +70,12 @@ app.directive('modalBody', function(){
         transclude: true
     };
 });
+
+app.directive('modalFooter', function(){
+    return {
+        template:'<div class="modal-footer" ng-transclude></div>',
+        replace: true,
+        restrict: 'E',
+        transclude: true
+    };
+});

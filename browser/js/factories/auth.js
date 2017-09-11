@@ -21,7 +21,7 @@ app.factory('Auth', function ($http, $q, $rootScope, Session, AUTH_EVENTS) {
       return $http.get('/session')
                   .then(onSuccessfulLogin)
                   .catch(function () {
-                            return $q.when({});
+                      return $q.when({});
                   });
     },
 

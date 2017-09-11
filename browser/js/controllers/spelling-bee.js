@@ -1,6 +1,7 @@
 'use strict'
 app.controller('spellingBeeCtrl', function ($scope, $state, checkFactory, spellingBee, UserFactory, SpellingBeeFactory, Auth) {
 	
+	$scope.isSavedPuzzle = false;
 	$scope.guess = "";
 	$scope.addValue = function(val){
 		$scope.guess += val;

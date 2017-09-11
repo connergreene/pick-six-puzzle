@@ -97,10 +97,10 @@ app.directive('navbar', function ($rootScope, $state, $location, Auth, AUTH_EVEN
 			scope.submitLogin = function(){
 				Auth.login(scope.userData)
 				.then(function(){
-					$state.go('home')
+					scope.showLoginModal = false;
+					$state.go('user', { id: scope.user._id });
 				}, function(){
 					scope.userData = {}
-					scope.showLoginModal = false;
 				})
 			}
 

@@ -76,7 +76,7 @@ router.put('/:id', (req, res, next) => {
 });
 
 
-router.delete('/:id', ensureOwner, (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
 
     spellingBeeModel.findByIdAndRemove(req.params.id).exec()
         .then(deletedSpellingBee => {

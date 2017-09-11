@@ -1,6 +1,7 @@
 'use strict'
-app.controller('savedSpellingBeeCtrl', function ($scope, checkFactory, spellingBee, UserFactory, SpellingBeeFactory, Auth, savedSpellingBee) {
+app.controller('savedSpellingBeeCtrl', function ($scope, $state, checkFactory, spellingBee, UserFactory, SpellingBeeFactory, Auth, savedSpellingBee) {
 	
+	$scope.isSavedPuzzle = true;
 	$scope.myPuzz = new spellingBee;
 	$scope.myPuzz.letters = savedSpellingBee.letters;
 	$scope.myPuzz.correctAnswers = savedSpellingBee.correctAnswers;
@@ -69,7 +70,23 @@ app.controller('savedSpellingBeeCtrl', function ($scope, checkFactory, spellingB
 		$scope.answers = $scope.myPuzz.answerKey;
 		$scope.showAnswers = true;
 		$scope.guess = "";
+		SpellingBeeFactory.destroy(savedSpellingBee)
+	    .then(function(){
+	        $scope.cancelGiveUp();  
+	    })
 	}
+
+	$scope.makeFullPuzz = function(){
+		$state.go('spelling-bee');
+	}
+
+	$scope.openGiveUp = function() {
+	    $scope.showGiveUp = true;
+	};
+
+	$scope.cancelGiveUp = function() {
+	    $scope.showGiveUp = false;
+	};
 
 
 });

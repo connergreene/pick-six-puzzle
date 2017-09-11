@@ -35,7 +35,7 @@ app.factory('SpellingBeeFactory', function ($http) {
             .then(res => res.data);
         },
 
-        delete (spellingBee) {
+        destroy (spellingBee) {
             return $http({
                 url: '/api/spelling-bee/' + spellingBee._id,
                 method: 'DELETE',

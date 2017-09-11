@@ -155,6 +155,6 @@ app.controller('pickSixCtrl', function ($scope, $state, pickSix, checkFactory, $
 		});
 		return;
 	}
-
+	$scope.isSavedPuzzle = false;
 	$scope.makeFullPuzz();
 });

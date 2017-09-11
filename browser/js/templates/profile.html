@@ -1,26 +1,66 @@
-<h1>My Six For A Spells</h1>
-<div class="pick-six-collection">
-	<div class="saved-pick-six" ng-repeat="pickSix in pickSixes">
-		<picksix ui-sref="saved-pick-six({id: pickSix._id})" states="pickSix.states"></picksix>
-		<div class="progress-wrapper">
-			<uib-progressbar class="progress active" max="pickSix.answerKeySize" value="pickSix.correctAnswers.length">
-			<i class="progress-text">
-				{{ pickSix.correctAnswers.length }} / {{ pickSix.answerKeySize}}
-			</i>
-			</uib-progressbar>
+<div class="profile-container">
+	<div class="my-pick-six">
+		<h1>My Six For A Spells</h1>
+		<div id="pick-six-collection">
+			<div class="saved-pick-six" ng-repeat="pickSix in pickSixes">
+				<button ng-click="openPickSixDelete(pickSix)" type="button" class="btn btn-default btn-sm">
+					<span class="glyphicon glyphicon-trash"></span>
+				</button>
+				<picksix ui-sref="saved-pick-six({id: pickSix._id})" states="pickSix.states"></picksix>
+				<div class="progress-wrapper">
+					<uib-progressbar class="progress active" max="pickSix.answerKeySize" value="pickSix.correctAnswers.length">
+					<i class="progress-text">
+						{{ pickSix.correctAnswers.length }} / {{ pickSix.answerKeySize}}
+					</i>
+					</uib-progressbar>
+				</div>
+			</div>
+			<p ng-if="pickSixes.length < 1">
+				You have no Six For A Spell Puzzles Saved! <a ui-sref="pick-six">Play New One.</a>
+			</p>
+		</div>
+	</div>
+	<div class="my-spelling-bee">
+		<h1>My Spelling Bees</h1>
+		<div id="spelling-bee-collection">
+			<div class="saved-spelling-bee" ng-repeat="spellingBee in spellingBees">
+				<button ng-click="openSpellingBeeDelete(spellingBee)" type="button" class="btn btn-default btn-sm">
+					<span class="glyphicon glyphicon-trash"></span>
+				</button>
+				<spellingbee ui-sref="saved-spelling-bee({id: spellingBee._id})" letters="spellingBee.letters"></spellingbee>
+				<div class="progress-wrapper">
+					<uib-progressbar class="progress active" max="spellingBee.answerKeySize" value="spellingBee.correctAnswers.length">
+						<i class="progress-text">
+							{{ spellingBee.correctAnswers.length }} / {{ spellingBee.answerKeySize}}
+						</i>
+					</uib-progressbar>
+				</div>
+			</div>
+			<p ng-if="spellingBees.length < 1">
+				You have no Spelling Bee Puzzles Saved! <a ui-sref="spelling-bee">Play New One.</a>
+			</p>
 		</div>
 	</div>
 </div>
-<h1>My Spelling Bees</h1>
-<div class="spelling-bee-collection">
-	<div class="saved-spelling-bee" ng-repeat="spellingBee in spellingBees">
-		<spellingbee ui-sref="saved-spelling-bee({id: spellingBee._id})" letters="spellingBee.letters"></spellingbee>
-		<div class="progress-wrapper">
-			<uib-progressbar class="progress active" max="spellingBee.answerKeySize" value="spellingBee.correctAnswers.length">
-				<i class="progress-text">
-					{{ spellingBee.correctAnswers.length }} / {{ spellingBee.answerKeySize}}
-				</i>
-			</uib-progressbar>
-		</div>
-	</div>
-</div>
+<modal class="deletePickSixModal" visible="showDeletePickSix" close="cancelPickSix()">
+	<modal-header title="Are you sure you want to delete this puzzle?"></modal-header>
+	<modal-body>
+		<button ng-click="deletePickSix()">
+			Yes
+		</button>
+		<button ng-click="cancelPickSix()">
+			No
+		</button>
+	</modal-body>
+</modal>
+<modal class="deleteSpellingBeeModal" visible="showDeleteSpellingBee" close="cancelSpellingBee()">
+	<modal-header title="Are you sure you want to delete this puzzle?"></modal-header>
+	<modal-body>
+		<button ng-click="deleteSpellingBee()">
+			Yes
+		</button>
+		<button ng-click="cancelSpellingBee()">
+			No
+		</button>
+	</modal-body>
+</modal>

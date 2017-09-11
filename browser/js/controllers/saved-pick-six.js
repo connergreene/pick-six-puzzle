@@ -1,5 +1,5 @@
 'use strict'
-app.controller('savedPickSixCtrl', function ($scope, pickSix, checkFactory, $q, UserFactory, Auth, PickSixFactory, savedPickSix) {
+app.controller('savedPickSixCtrl', function ($scope, $state, pickSix, checkFactory, $q, UserFactory, Auth, PickSixFactory, savedPickSix) {
 	
 	$scope.myPuzz = new pickSix;
 	$scope.myPuzz.states = savedPickSix.states;
@@ -11,6 +11,8 @@ app.controller('savedPickSixCtrl', function ($scope, pickSix, checkFactory, $q, 
 		$scope.myPuzz.answerKey = answers;
 		$scope.answerAmount = answers.length;
 	});
+
+	$scope.isSavedPuzzle = true;
 
 	$scope.backspace = function(){
 		if($scope.guess.length>0){
@@ -111,7 +113,7 @@ app.controller('savedPickSixCtrl', function ($scope, pickSix, checkFactory, $q, 
 			$scope.clear();
 			$scope.answerAmount--;
 			if($scope.answerAmount === 0){
-				$scope.endGame();
+				//$scope.endGame();
 				alert("YOU DID IT!!!!!!!!!!!!");
 			}
 		}
@@ -136,7 +138,23 @@ app.controller('savedPickSixCtrl', function ($scope, pickSix, checkFactory, $q, 
 		$scope.guess = "";
 		$scope.clicked = [];
 		makeAllUnclickable();
+		PickSixFactory.destroy(savedPickSix)
+	    .then(function(){
+	        $scope.cancelGiveUp();  
+	    })
 	}
+
+	$scope.makeFullPuzz = function(){
+		$state.go('pick-six');
+	}
+
+	$scope.openGiveUp = function() {
+	    $scope.showGiveUp = true;
+	};
+
+	$scope.cancelGiveUp = function() {
+	    $scope.showGiveUp = false;
+	};
 
 
 });

@@ -35,7 +35,7 @@ app.factory('PickSixFactory', function ($http) {
             .then(res => res.data);
         },
 
-        delete (pickSix) {
+        destroy (pickSix) {
             return $http({
                 url: '/api/pick-six/' + pickSix._id,
                 method: 'DELETE',

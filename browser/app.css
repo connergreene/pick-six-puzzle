@@ -255,10 +255,16 @@ button {
     fill: rgba(128,128,128,0.3);
 }
 
-.pick-six-collection {
+#pick-six-collection {
+	display: flex;
 	height: 200px;
-	overflow: scroll;
-    /*direction: rtl;*/
+    min-width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+#pick-six-collection p {
+	font-size: 20px;
 }
 
 picksix svg {
@@ -270,6 +276,11 @@ picksix svg text {
 	font-size: 15px;
 }
 
+.pixed-six-icon-container {
+	position: relative;
+    bottom: 30px;
+}
+
 .saved-pick-six {
 	border-radius: 5px;
     box-shadow: 0 0 30px #ccc;
@@ -277,7 +288,6 @@ picksix svg text {
 	background-color: white;
     width: 180px;
     height: 160px;
-    float: left;
     margin-right: 10px;
     margin-bottom: 40px;
 }
@@ -286,8 +296,24 @@ picksix svg text {
 	box-shadow: 0px 0px 30px black;
 }
 
-.spelling-bee-collection {
-	height: 200px;
+.saved-pick-six button {
+	float: right;
+    position: relative;
+    z-index: 1;
+    color: white;
+    background-color: red;
+}
+
+#spelling-bee-collection {
+	display: flex;
+	height: 190px;
+    min-width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+#spelling-bee-collection p {
+	font-size: 20px;
 }
 
 .spelling-bee-icon {
@@ -298,10 +324,30 @@ picksix svg text {
 .spelling-bee-icon svg {
 	text-anchor: middle;
 	height: 100%;
+	position: relative;
+    bottom: 20px;
 }
 
 .spelling-bee-icon svg text{
 	font-size: 20px;
+}
+
+.saved-spelling-bee button {
+	float: right;
+    position: relative;
+    z-index: 1;
+    color: white;
+    background-color: red;
+}
+
+.my-pick-six {
+	min-width: 100%;
+    text-align: center;
+}
+
+.my-spelling-bee {
+	width: 100%;
+	text-align: center;
 }
 
 .saved-spelling-bee {
@@ -309,9 +355,8 @@ picksix svg text {
     box-shadow: 0 0 30px #ccc;
     cursor: pointer;
 	background-color: white;
-    width: 180px;
+    min-width: 180px;
     height: 160px;
-    float: left;
     margin-right: 10px;
     margin-bottom: 40px;
 }
@@ -322,6 +367,11 @@ picksix svg text {
 
 .progress {
 	position: relative;
+	bottom: 25px;
+}
+
+.saved-spelling-bee .progress {
+	bottom: 15px;
 }
 
 .progress-text {
@@ -330,6 +380,39 @@ picksix svg text {
     width: 100%;
 	color: black;
 }
+
+.deletePickSixModal .modal-content {
+	margin-top: 50%;
+}
+
+.deletePickSixModal .modal-body {
+	display: flex;
+	justify-content: space-around;
+}
+
+.deleteSpellingBeeModal .modal-content {
+	margin-top: 50%;
+}
+
+.deleteSpellingBeeModal .modal-body {
+	display: flex;
+	justify-content: space-around;
+}
+
+.giveUpModal .modal-content {
+	margin-top: 50%;
+}
+
+.giveUpModal .modal-body {
+	display: flex;
+	justify-content: space-around;
+}
+
+
+.modal-backdrop {
+	display: none;
+}
+
 
 /*log in page*/
 .login-modal .modal-content {

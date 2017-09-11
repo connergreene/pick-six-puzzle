@@ -9,7 +9,8 @@
 
 	<div class="buttons-top">
 		<button id="new-btn" ng-click="makeFullPuzz()">New Puzzle</button>
-		<button id="end-btn" ng-hide="showAnswers" ng-click="endGame()">Give Up</button>
+		<button id="end-btn" ng-if="!isSavedPuzzle" ng-hide="showAnswers" ng-click="endGame()">Give Up</button>
+		<button id="end-btn" ng-if="isSavedPuzzle" ng-hide="showAnswers" ng-click="openGiveUp()">Give Up</button>
 		<button id="new-btn" ng-hide="showAnswers" ng-click="save()">Save</button>
 	</div>
 	<div class="guess">
@@ -124,3 +125,14 @@
 		</g>
 	</svg>
 </div>
+<modal class="giveUpModal" visible="showGiveUp" close="cancelGiveUp()">
+	<modal-header title="Are you sure you want to give up and lose this puzzle?"></modal-header>
+	<modal-body>
+		<button ng-click="endGame()">
+			Yes
+		</button>
+		<button ng-click="cancelGiveUp()">
+			No
+		</button>
+	</modal-body>
+</modal>

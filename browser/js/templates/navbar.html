@@ -2,7 +2,7 @@
 	<div ng-style="whichPage()==='signup' ? { 'display': 'flex',
     'justify-content': 'center' } : { 'display': 'inherit' }" class="container">
 		<div class="navbar-header">
-			<div ng-if="whichPage()!=='home'" class="home-btn" ui-sref="home">
+			<div ng-if="whichPage()==='signup'" class="home-btn" ui-sref="home">
 				Times Games
 			</div>
 			<button ng-if="whichPage()==='home' && isLoggedIn()" class="back-btn" ng-click="myPuzzles()">
@@ -22,10 +22,10 @@
 					Based on game by Frank Longo of the NYT
 				</div>
 			</div>
-			<button class="signup-btn" ui-sref="signup" ng-if="whichPage() === 'home'">
+			<button class="signup-btn" ui-sref="signup" ng-if="whichPage() === 'home' && !isLoggedIn()">
 				Sign Up
 			</button>
-			<button class="login-btn" ng-if="whichPage() === 'home'" ng-click="openLogin()">
+			<button class="login-btn" ng-if="whichPage() === 'home' && !isLoggedIn()" ng-click="openLogin()">
 				Log In
 			</button>
 			<button ng-if="whichPage()!=='home'" class="rules-btn" ng-click="open()">

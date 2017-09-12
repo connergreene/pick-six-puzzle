@@ -652,6 +652,18 @@ picksix svg text {
 	.login-modal .modal-content {
 		margin-top: 0%;
 	}
+
+	.deletePickSixModal .modal-content {
+		margin-top: 0%;
+	}
+
+	.deleteSpellingBeeModal .modal-content {
+		margin-top: 0%;
+	}
+
+	.giveUpModal .modal-content {
+		margin-top: 0%;
+	}
 }
 
 @media screen and (max-width : 460px), screen and (max-device-width : 460px) {

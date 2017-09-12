@@ -74,6 +74,24 @@ app.directive('navbar', function ($rootScope, $state, $location, Auth, AUTH_EVEN
 				}
 			}
 
+			scope.showPickSixRules = function(){
+				if ($location.path().includes('/pick-six')){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+
+			scope.showSpellingBeeRules = function(){
+				if ($location.path().includes('/spelling-bee')){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+
 			scope.open = function() {
 				scope.showModal = true;
 			};

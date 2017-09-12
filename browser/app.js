@@ -17,7 +17,7 @@ app.constant('AUTH_EVENTS', {
 	notAuthorized: 'auth-not-authorized'
 });
 
-app.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
+app.factory('AuthInterceptor', function ($rootScope, $q, $state, AUTH_EVENTS) {
 	var statusDict = {
 		401: AUTH_EVENTS.notAuthenticated,
 		403: AUTH_EVENTS.notAuthorized,
@@ -27,6 +27,7 @@ app.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
 	return {
 		responseError: function (response) {
 			$rootScope.$broadcast(statusDict[response.status], response);
+			$state.go('home');
 			return $q.reject(response)
 		}
 	};

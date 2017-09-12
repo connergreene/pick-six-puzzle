@@ -6,7 +6,7 @@ app.config(function ($stateProvider) {
 		templateUrl: 'browser/js/templates/signup.html',
 		controller: 'SignupCtrl',
 		authenticate: {
-			loggedOut: true
+			loggedOut: false
 		}
 	});
 });

@@ -10,7 +10,7 @@ app.config(function ($stateProvider) {
             }
         },
 		authenticate: {
-			loggedOut: false
+			loggedOut: true
 		}
 	});
 });

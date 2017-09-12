@@ -38,6 +38,41 @@ app.directive('navbar', function ($rootScope, $state, $location, Auth, AUTH_EVEN
 				}
 			}
 
+			scope.showRulesBtn = function(){
+				if ($location.path().includes('/pick-six') || $location.path().includes('/spelling-bee')){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+
+			scope.showHomeBtn = function(){
+				if ($location.path().includes('/users/') || $location.path() === '/pick-six' || $location.path() === '/spelling-bee' || $location.path() === '/signup'){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+
+			scope.showLogOutBtn = function(){
+				if ($location.path().includes('/users/') || $location.path() === '/'){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+
+			scope.showMyPuzzlesBtn = function(){
+				if ($location.path().includes('/pick-six/') || $location.path().includes('/spelling-bee/') || $location.path() === '/'){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
 
 			scope.open = function() {
 				scope.showModal = true;

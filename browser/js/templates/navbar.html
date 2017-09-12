@@ -1,11 +1,10 @@
 <nav ng-if="showNav()" class="navbar navbar-default">
-	<div ng-style="whichPage()==='signup' ? { 'display': 'flex',
-    'justify-content': 'center' } : { 'display': 'inherit' }" class="container">
+	<div class="container">
 		<div class="navbar-header">
-			<div ng-if="whichPage()==='signup'" class="home-btn" ui-sref="home">
-				Times Games
-			</div>
-			<button ng-if="whichPage()==='home' && isLoggedIn()" class="back-btn" ng-click="myPuzzles()">
+			<button ng-if="showHomeBtn()" class="home-btn" ui-sref="home">
+				Home
+			</button>
+			<button ng-if="showMyPuzzlesBtn() && isLoggedIn()" class="mypuzz-btn" ng-click="myPuzzles()">
 				My Puzzles
 			</button>
 			<div class="title-wrap">
@@ -28,10 +27,10 @@
 			<button class="login-btn" ng-if="whichPage() === 'home' && !isLoggedIn()" ng-click="openLogin()">
 				Log In
 			</button>
-			<button ng-if="whichPage()!=='home'" class="rules-btn" ng-click="open()">
+			<button ng-if="showRulesBtn()" class="rules-btn" ng-click="open()">
 				Rules
 			</button>
-			<button ng-if="isLoggedIn()" class="back-btn" ng-click="logOut()">
+			<button ng-if="isLoggedIn() && showLogOutBtn()" class="logout-btn" ng-click="logOut()">
 				Log Out
 			</button>
 		</div>

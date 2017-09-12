@@ -47,6 +47,10 @@ app.controller('savedSpellingBeeCtrl', function ($scope, $state, checkFactory, s
 			$scope.myPuzz.correctAnswers.push($scope.guess);
 			$scope.clear();
 			$scope.answerAmount--;
+			var savedInfo = {};
+			savedInfo._id = savedSpellingBee._id;
+			savedInfo.correctAnswers = $scope.myPuzz.correctAnswers;
+			SpellingBeeFactory.update(savedSpellingBee);
 			if($scope.answerAmount === 0){
 				$scope.endGame();
 				alert("YOU DID IT!!!!!!!!!!!!");
@@ -56,13 +60,6 @@ app.controller('savedSpellingBeeCtrl', function ($scope, $state, checkFactory, s
 			$scope.message = "Not an answer!";
 		}
 		
-	}
-
-	$scope.save = function(){
-		var savedInfo = {};
-		savedInfo._id = savedSpellingBee._id;
-		savedInfo.correctAnswers = $scope.myPuzz.correctAnswers;
-		SpellingBeeFactory.update(savedSpellingBee);
 	}
 
 	$scope.endGame = function(){

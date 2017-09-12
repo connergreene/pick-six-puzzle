@@ -112,6 +112,10 @@ app.controller('savedPickSixCtrl', function ($scope, $state, pickSix, checkFacto
 			$scope.myPuzz.correctAnswers.push($scope.guess);
 			$scope.clear();
 			$scope.answerAmount--;
+			var savedInfo = {};
+			savedInfo._id = savedPickSix._id;
+			savedInfo.correctAnswers = $scope.myPuzz.correctAnswers;
+			PickSixFactory.update(savedPickSix);
 			if($scope.answerAmount === 0){
 				//$scope.endGame();
 				alert("YOU DID IT!!!!!!!!!!!!");
@@ -121,14 +125,6 @@ app.controller('savedPickSixCtrl', function ($scope, $state, pickSix, checkFacto
 			$scope.message = "Not an answer!";
 		}
 		
-	}
-
-	$scope.save = function(){
-		var savedInfo = {};
-		savedInfo._id = savedPickSix._id;
-		savedInfo.correctAnswers = $scope.myPuzz.correctAnswers;
-		PickSixFactory.update(savedPickSix);
-
 	}
 	
 	$scope.endGame = function(){

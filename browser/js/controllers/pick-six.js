@@ -1,6 +1,6 @@
 'use strict'
 app.controller('pickSixCtrl', function ($scope, $state, pickSix, checkFactory, $q, UserFactory, Auth, PickSixFactory) {
-	
+	$scope.isLoggedIn = Auth.isAuthenticated();
 	$scope.backspace = function(){
 		if($scope.guess.length>0){
 			$scope.guess = $scope.guess.slice(0, $scope.guess.length-1);

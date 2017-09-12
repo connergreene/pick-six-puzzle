@@ -11,7 +11,7 @@
 		<button id="new-btn" ng-click="makeFullPuzz()">New Puzzle</button>
 		<button id="end-btn" ng-if="!isSavedPuzzle" ng-hide="showAnswers" ng-click="endGame()">Give Up</button>
 		<button id="end-btn" ng-if="isSavedPuzzle" ng-hide="showAnswers" ng-click="openGiveUp()">Give Up</button>
-		<button id="new-btn" ng-hide="showAnswers" ng-click="save()">Save</button>
+		<button ng-if="isLoggedIn && !isSavedPuzzle" id="new-btn" ng-hide="showAnswers" ng-click="save()">Save</button>
 	</div>
 	<div class="guess">
 		<h1> {{ guess }} </h1>

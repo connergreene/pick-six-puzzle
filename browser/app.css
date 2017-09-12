@@ -60,22 +60,32 @@ body {
 
 .back-btn {
 	float: left;
+	height: 39px;
+	width: 62px;
 }
 
 .home-btn {
 	float: left;
+	height: 39px;
+	width: 62px;
 }
 
 .mypuzz-btn {
 	float: left;
+	height: 39px;
+	width: 62px;
+	font-size: 12px;
 }
 
 .rules-btn {
 	display: none;
+	height: 39px;
+	width: 62px;
 }
 
 .logout-btn {
 	float: right;
+	height: 39px;
 }
 
 .title-container {
@@ -660,6 +670,20 @@ picksix svg text {
 	.six-puzzle {
 		right: -2%;
 	}
+}
+
+@media screen and (max-width : 346px), screen and (max-device-width : 346px) {
+	.title-wrap .nav-title {
+    	font-size: 18px;
+    }
+
+    .title-wrap .nav-subtitle {
+    	font-size: 8px;
+    }
+
+    .title-wrap {
+    	bottom: 5px;
+    }
 }
 
 @media screen and (max-width: 320px), screen and (max-device-width: 320px){

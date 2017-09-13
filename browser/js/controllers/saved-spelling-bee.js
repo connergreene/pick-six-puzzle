@@ -56,6 +56,9 @@ app.controller('savedSpellingBeeCtrl', function ($scope, $state, checkFactory, s
 				alert("YOU DID IT!!!!!!!!!!!!");
 			}
 		}
+		else if(!$scope.guess.includes($scope.myPuzz.letters[0])){
+			$scope.message = "Word must contain the middle letter!";
+		}
 		else{
 			$scope.message = "Not an answer!";
 		}

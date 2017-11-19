@@ -1,0 +1,518 @@
+body {
+  background-color: #ffffff;
+  background-image: url("/images/clean-gray-paper.png"); }
+
+.main-title {
+  text-align: center;
+  font-family: "nyt-cheltenham";
+  font-size: 50px;
+  margin-bottom: 50px; }
+
+.home-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly; }
+
+.icon {
+  text-align: center; }
+
+.icon img {
+  width: 400px;
+  height: 350px;
+  border-radius: 5px;
+  box-shadow: 0 0 30px #ccc;
+  cursor: pointer; }
+
+.icon img:hover {
+  box-shadow: 0px 0px 30px black; }
+
+.navbar-header {
+  position: relative;
+  top: 7px;
+  float: right; }
+
+.navbar-header button {
+  background-color: black;
+  color: white; }
+
+.container {
+  height: 50px; }
+
+.title-wrap {
+  display: none; }
+
+.back-btn {
+  float: left;
+  height: 39px;
+  width: 62px; }
+
+.home-btn {
+  float: left;
+  height: 39px;
+  width: 62px; }
+
+.mypuzz-btn {
+  float: left;
+  height: 39px;
+  width: 62px;
+  font-size: 12px; }
+
+.rules-btn {
+  display: none;
+  height: 39px;
+  width: 62px; }
+
+.logout-btn {
+  float: right;
+  height: 39px; }
+
+.title-container {
+  margin-bottom: 30px;
+  text-align: center; }
+
+.title {
+  font-size: 44px;
+  margin-bottom: -25px; }
+
+.subtitle {
+  font-size: 13px;
+  color: grey; }
+
+.six-puzzle {
+  position: fixed;
+  height: 600px;
+  width: 1200px;
+  margin-left: 425px;
+  top: 80px; }
+
+svg {
+  width: 100%;
+  /*This goes here because SVG uses em as units*/
+  font: normal 9pt sans-serif;
+  height: 600px; }
+
+svg g line {
+  stroke: black;
+  stroke-width: 2px; }
+
+.state-circle svg g circle {
+  fill: black; }
+
+.state-circle:hover {
+  cursor: pointer; }
+
+svg g text {
+  fill: white;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-size: 40px; }
+
+.guess {
+  border: solid black;
+  border-radius: 5px;
+  width: 100%;
+  height: 80px;
+  overflow: scroll; }
+
+.control-panel {
+  float: left;
+  width: 370px; }
+
+.control-panel p {
+  font-size: 15px;
+  position: relative;
+  bottom: 10px; }
+
+.buttons-top {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  bottom: 10px; }
+
+#new-btn {
+  background-color: blue;
+  color: white; }
+
+#end-btn {
+  background-color: red;
+  color: white; }
+
+.words-left {
+  display: none; }
+
+.buttons-bottom {
+  text-align: center;
+  position: relative;
+  top: 10px; }
+
+.buttons-bottom button {
+  width: 49%; }
+
+#backspace-btn {
+  background-color: blue;
+  color: white; }
+
+#submit-btn {
+  background-color: green;
+  color: white; }
+
+button {
+  font-size: 20px;
+  border: none;
+  border-radius: 5px; }
+
+#message {
+  position: relative;
+  bottom: 0px;
+  top: 15px;
+  text-align: center;
+  font-size: 20px;
+  color: red; }
+
+.correct-guesses {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  height: 300px;
+  text-align: center;
+  position: relative;
+  top: 25px; }
+
+.correct-guesses div {
+  width: 120px; }
+
+.answers {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  height: 300px;
+  text-align: center;
+  position: relative;
+  top: 25px; }
+
+.answers div {
+  width: 120px; }
+
+.correct {
+  color: lightgreen; }
+
+.all {
+  font-weight: bold; }
+
+.incorrect {
+  color: red; }
+
+.spelling-bee text {
+  font-size: 45px;
+  text-anchor: middle; }
+
+.bee-puzzle {
+  position: fixed;
+  height: 600px;
+  width: 1200px;
+  margin-left: 625px;
+  top: 25%; }
+
+.letter-click {
+  cursor: pointer; }
+
+.letter-click:hover {
+  fill: rgba(128, 128, 128, 0.3); }
+
+#pick-six-collection {
+  display: flex;
+  height: 200px;
+  min-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden; }
+
+#pick-six-collection p {
+  font-size: 20px; }
+
+picksix svg {
+  width: 300px;
+  height: 160px; }
+
+picksix svg text {
+  font-size: 15px; }
+
+.pixed-six-icon-container {
+  position: relative;
+  bottom: 30px; }
+
+.saved-pick-six {
+  border-radius: 5px;
+  box-shadow: 0 0 30px #ccc;
+  cursor: pointer;
+  background-color: white;
+  width: 180px;
+  height: 160px;
+  margin-right: 10px;
+  margin-bottom: 40px; }
+
+.saved-pick-six:hover {
+  box-shadow: 0px 0px 30px black; }
+
+.saved-pick-six button {
+  float: right;
+  position: relative;
+  z-index: 1;
+  color: white;
+  background-color: red; }
+
+#spelling-bee-collection {
+  display: flex;
+  height: 190px;
+  min-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden; }
+
+#spelling-bee-collection p {
+  font-size: 20px; }
+
+.spelling-bee-icon {
+  width: 142px;
+  margin: 9px auto 0px auto; }
+
+.spelling-bee-icon svg {
+  text-anchor: middle;
+  height: 100%;
+  position: relative;
+  bottom: 20px; }
+
+.spelling-bee-icon svg text {
+  font-size: 20px; }
+
+.saved-spelling-bee button {
+  float: right;
+  position: relative;
+  z-index: 1;
+  color: white;
+  background-color: red; }
+
+.my-pick-six {
+  min-width: 100%;
+  text-align: center; }
+
+.my-spelling-bee {
+  width: 100%;
+  text-align: center; }
+
+.saved-spelling-bee {
+  border-radius: 5px;
+  box-shadow: 0 0 30px #ccc;
+  cursor: pointer;
+  background-color: white;
+  min-width: 180px;
+  height: 160px;
+  margin-right: 10px;
+  margin-bottom: 40px; }
+
+.saved-spelling-bee:hover {
+  box-shadow: 0px 0px 30px black; }
+
+.progress {
+  position: relative;
+  bottom: 25px; }
+
+.saved-spelling-bee .progress {
+  bottom: 15px; }
+
+.progress-text {
+  position: absolute;
+  display: block;
+  width: 100%;
+  color: black; }
+
+.deletePickSixModal .modal-content {
+  margin-top: 50%; }
+
+.deletePickSixModal .modal-body {
+  display: flex;
+  justify-content: space-around; }
+
+.deleteSpellingBeeModal .modal-content {
+  margin-top: 50%; }
+
+.deleteSpellingBeeModal .modal-body {
+  display: flex;
+  justify-content: space-around; }
+
+.giveUpModal .modal-content {
+  margin-top: 50%; }
+
+.giveUpModal .modal-body {
+  display: flex;
+  justify-content: space-around; }
+
+.modal-backdrop {
+  display: none; }
+
+/*log in page*/
+.login-modal .modal-content {
+  margin-top: 50%; }
+
+.guest-btn {
+  float: left; }
+
+.modal-header {
+  text-align: center; }
+
+.modal-body button {
+  color: white;
+  background-color: black; }
+
+.modal-footer {
+  text-align: center; }
+
+.modal-signup-btn {
+  cursor: pointer; }
+
+/*signup page*/
+.signup-container {
+  margin: 10% auto;
+  width: 372px; }
+
+.signup-container h1 {
+  font-size: 30px; }
+
+@media screen and (max-width: 830px), screen and (max-device-width: 1000px) {
+  .rules-btn {
+    display: inline-block;
+    float: right; }
+  .navbar-header {
+    text-align: center;
+    width: 100%; }
+  .navbar {
+    display: flex;
+    justify-content: center; }
+  .container {
+    display: flex;
+    justify-content: center;
+    width: 100%; }
+  .title-wrap {
+    display: inline-block;
+    position: relative;
+    bottom: 15px; }
+  .title-wrap .nav-title {
+    font-size: 28px;
+    position: relative;
+    top: 5px; }
+  .title-wrap .nav-subtitle {
+    font-size: 10px;
+    color: grey; }
+  .modal-content {
+    position: relative;
+    top: 175px; }
+  .modal-header {
+    text-align: center; }
+  .main-title {
+    margin-bottom: 15px;
+    font-size: 39px; }
+  .home-container {
+    display: block; }
+  .icon img {
+    width: 200px;
+    height: 180px; }
+  .icon h1 {
+    margin-top: 5px;
+    margin-bottom: 25px;
+    font-size: 30px; }
+  .title {
+    display: none; }
+  .subtitle {
+    display: none; }
+  .answers {
+    top: 290px; }
+  .answers div {
+    width: 33%; }
+  .correct-guesses {
+    top: 325px; }
+  .correct-guesses div {
+    width: 33%; }
+  .bee-puzzle {
+    margin-left: 0px;
+    top: 150px;
+    display: flex;
+    justify-content: center;
+    width: 105%;
+    position: absolute; }
+  .spelling-bee {
+    height: 350px;
+    position: relative;
+    width: auto;
+    right: 30px; }
+  .control-panel {
+    width: 100%; }
+  .directions {
+    display: none; }
+  .control-panel p {
+    position: relative;
+    top: -60px;
+    font-size: 10px; }
+  #message {
+    top: -85px;
+    font-size: 14px; }
+  .buttons-top {
+    position: relative;
+    top: -40px; }
+  .guess {
+    position: relative;
+    top: -30px;
+    height: 50px; }
+  .guess h1 {
+    margin-top: 2px; }
+  .words-left {
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    position: relative;
+    top: 265px; }
+  .buttons-bottom {
+    position: relative;
+    top: 325px;
+    z-index: 1; }
+  .six-puzzle {
+    position: absolute;
+    margin-left: 0px;
+    right: -12%;
+    width: 97%;
+    top: 175px;
+    text-align: center; }
+  .six-puzzle svg {
+    height: 300px;
+    width: 550px; }
+  .six-puzzle svg g circle {
+    r: 25px; }
+  .login-modal .modal-content {
+    margin-top: 0%; }
+  .deletePickSixModal .modal-content {
+    margin-top: 0%; }
+  .deleteSpellingBeeModal .modal-content {
+    margin-top: 0%; }
+  .giveUpModal .modal-content {
+    margin-top: 0%; } }
+
+@media screen and (max-width: 460px), screen and (max-device-width: 460px) {
+  .six-puzzle {
+    right: -5%; }
+  .signup-container {
+    width: 80%; } }
+
+@media screen and (max-width: 390px), screen and (max-device-width: 390px) {
+  .six-puzzle {
+    right: -2%; } }
+
+@media screen and (max-width: 346px), screen and (max-device-width: 346px) {
+  .title-wrap .nav-title {
+    font-size: 18px; }
+  .title-wrap .nav-subtitle {
+    font-size: 8px; }
+  .title-wrap {
+    bottom: 5px; } }
+
+@media screen and (max-width: 320px), screen and (max-device-width: 320px) {
+  .six-puzzle {
+    right: 5%; } }
